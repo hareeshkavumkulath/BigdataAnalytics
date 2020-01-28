@@ -16,3 +16,5 @@ Kind of questions to answer:
 6. How do 311 requests vary by neighborhood? or source? Overtime or seasonally?
 7. What attributes have the greatest effect on how long it takes a case to close?
 8. Is there a way to identify duplicative reports (when multiple people create a 311 report for the same incidence)
+
+The datasets are available in http://donnees.ville.montreal.qc.ca/dataset/requete-311
