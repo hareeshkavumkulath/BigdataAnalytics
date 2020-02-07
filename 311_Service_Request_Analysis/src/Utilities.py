@@ -16,7 +16,10 @@ def read_data_from_csv(filename):
     return nyc_311_df
 
 
-def print_df_row_as_dict(df_row):
-    for col in df_row.asDict():
-        print(col + ":" + str(df_row[col]))
+def get_df_row_as_dict(df_row):
+    return df_row.asDict()
 
+
+def print_df_row_as_dict(df_row):
+    for col in get_df_row_as_dict(df_row):
+        print(col + ":" + str(df_row[col]))
