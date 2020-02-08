@@ -5,7 +5,7 @@ def init_spark():
     spark = SparkSession \
         .builder \
         .appName("NYC 311 Data Analysis") \
-        .config("spark.some.config.option", "some-value") \
+        .config('spark.sql.codegen.wholeStage', 'false') \
         .getOrCreate()
     return spark
 

@@ -1,5 +1,5 @@
 from pyspark.sql import functions as f
-
+import Constants
 import Utilities as utilFor311
 
 
@@ -8,17 +8,11 @@ def get_missing_value_count(df_311):
 
 
 def drop_unwanted_cols(df_311):
-    drop_list = ['Agency Name', 'Incident Address', 'Street Name', 'Cross Street 1', 'Cross Street 2',
-                 'Intersection Street 1', 'Intersection Street 2', 'Landmark', 'Facility Type', 'Location_Type',
-                 'Resolution Description', 'Resolution Action Updated Date', 'Community Board', 'BBL',
-                 'X Coordinate (State Plane)', 'Y Coordinate (State Plane)', 'Park Facility Name', 'Park Borough',
-                 'Vehicle Type', 'Taxi Company Borough', 'Taxi Pick Up Location', 'Bridge Highway Name',
-                 'Bridge Highway Direction', 'Road Ramp', 'Bridge Highway Segment', 'Latitude', 'Longitude', 'Location']
-    df_311 = df_311.drop(*drop_list)
+    df_311 = df_311.drop(*Constants.DROP_COLS)
     df_size = df_311.count()
-    missing_value_count_df = utilFor311.check_for_null_values(df_311)
+    missing_value_count_df = get_missing_value_count(df_311)
     missing_counts_dict = utilFor311.get_df_row_as_dict(missing_value_count_df.collect()[0])
-    drop_list = [k for k, v in missing_counts_dict.items() if (v / df_size) >= 0.5]
+    drop_list = [k for k, v in missing_counts_dict.items() if (v / df_size) >= Constants.DROP_THRESHOLD]
     if len(drop_list) > 0:
         return df_311.drop(*drop_list)
     return df_311
