@@ -1,3 +1,5 @@
+# Single source for any re-usable constants
+
 CAPITALIZE_COLS = ['City', 'Borough']
 DROP_COLS = ['Agency Name', 'Incident Address', 'Street Name', 'Cross Street 1', 'Cross Street 2',
              'Intersection Street 1', 'Intersection Street 2', 'Landmark', 'Facility Type', 'Location_Type',
