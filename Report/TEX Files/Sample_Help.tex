@@ -34,8 +34,55 @@ With an overall motivation to offer a small subset of functionalities, a typical
 \item Further in this project we try building a predictive model with an ability to predict the closure time for a particular request. This provides greater transparency to citizens and a way for the policy makers to closely scrutinize the operations of the concerned department thereby allowing easy identification of inefficient or ineffective practices, if at all they exist.
 \end{itemize}
 \subsection{Related Work}
-The potential use of Open data towards developing smart cities and improving the delivery of public services has already attracted a massive community of researchers and data enthusiasts. Taking reference of 311-data alone, there exists Open311 \cite{1}, a standard protocol developed for civic issue tracking. Developers of the Open311 community even offer a rich set of APIs which are being used to create their independent applications, enabling citizens to conveniently raise and track their 311 requests. In terms of analysis Sam Goodgame and Romulo Manzano from UC Berkeley present a similar analysis of NYC 311 data \cite{2} on an AWS EC2 instance with Hadoop. In \cite{3} authors have gone a step further by combining 311 data for the city of Miami with Census Tracts data and analysing how 311 service request patterns are associated with personal attributes and living conditions. With most of the existing studies primarily relying on Python libraries like Numpy, Pandas and Scikit Learn, throughout this paper we would be trying to baseline our results against this existing work, while relying on an Apache Spark based implementation.
+The potential use of Open data towards developing smart cities and improving the delivery of public services has already attracted a massive community of researchers and data enthusiasts. Taking reference of 311-data alone, there exists Open311 [1], a standard protocol developed for civic issue tracking. Developers of the Open311 community even offer a rich set of APIs which are being used to create their independent applications, enabling citizens to conveniently raise and track their 311 requests. In terms of analysis Sam Goodgame and Romulo Manzano from UC Berkeley present a similar analysis of NYC 311 data [2] on an AWS EC2 instance with Hadoop. In [3] authors have gone a step further by combining 311 data for the city of Miami with Census Tracts data and analysing how 311 service request patterns are associated with personal attributes and living conditions. With the existing studies primarily relying on Python libraries like Numpy, Pandas and Scikit Learn, throughout this paper we would be trying to baseline our results against this existing work using an Apache Spark based implementation.
 
+\section{Section 2}
+
+\textbf{1. Sample 1:} Its some random text:
+\begin{itemize}
+  \item Sample Item 1 \textbf{{\em Sample Italics}} in the dataset.
+  \item Sample Item 1 \textbf{{\em Italics}}, 
+\end{itemize}
+
+\textbf{2. Sample 2:}\\
+\begin{tabular}{ |p{3cm}|p{5cm}|  }
+ \hline
+ \multicolumn{2}{|c|}{Sample Table} \\
+ \hline
+ Sample1 &Sample\_1, Sample\_2, Sample\_3\_1\\
+ \hline
+ Sample1 &Sample\_1, Sample\_2, Sample\_3\_1\\
+ \hline
+ Sample1 &Sample\_1, Sample\_2, Sample\_3\_1\\
+ \hline
+\end{tabular}\\
+
+\begin{figure}
+   \begin{center}
+  \includegraphics[width=\linewidth]{ConfusionMatrix.JPG}
+   \end{center}
+   \caption{Sample Confusion Matrix.\cite{W1}
+   \label{Img1}}
+\end{figure} 
+Sample Reference of a figure in text. Figure~\ref{Img1}.\\
+
+\begin{tabular}{ |p{0.5cm}||p{1.4cm}|p{1.4cm}|p{1.4cm}|p{1.4cm}|  }
+ \hline
+ \multicolumn{5}{|c|}{Multicol Table} \\
+ \hline
+ ID & Sample2 & Sample3 & Sample4 & Sample5\\
+ \hline
+ 1 & 74.5 & 64.5 & 63.5 & 66.0\\
+ \hline
+ 2 & 78.41 & 81.61 & 81.81 & 82.95\\
+ \hline
+\end{tabular}\\
+
+\begin{equation}
+\frac{\partial Sample Equation_{y_i}}{\partial X}
+\end{equation}
+
+\section{Conclusions}
 \appendix
 {\small
 \bibliographystyle{cvpr_bibstyle}
