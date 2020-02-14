@@ -62,7 +62,21 @@ We calculated the time taken to resolve the issue from the creation date and clo
 
 Based on the analysis question and our initial findings we have come up with the above modification on the dataset. 
 
+#### Technologies and Algorithms
 
+1. SPARK:
+	* It is a general-purpose distributed computing engine used for processing and analyzing a large amount of data and because of size of 311 dataset, the SPARK would be best fit.
+	* Dataframe API - the Dataframe API act as distributed SQL query engine which will be used for analysis where we require to filter the dataset based on requirement.
+
+2. Supervised learning will be used to to fullfill our second objective to predict the closure time for the request. SPARKML library available regression Algorithms will be used. RMSE (Root Mean Squared Error) will be used to evaluate our Algorithms. Algorithm includes:
+	* Linear Regression.
+	* Decision Tree.
+	* Random Forest.
+	* Gradient boosted tree Regression.
+
+2. Unsupervised learning will be used to to fullfill our first objective to provide statistical insights:
+	* K-Means clustering to get clusters based on longitude and latitude.
+	* To find out the optimal number of clusters, the ELBOW method will be used. The ELBOW method is a heuristic method of interpretation and validation of consistency within cluster analysis designed to help find the appropriate number of clusters in a dataset.
 
 
 
