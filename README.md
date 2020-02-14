@@ -29,7 +29,7 @@ Taking reference of 311-data alone, there exists Open311 [1], a standard protoco
 
 ## Materials and Methods
 
-#### Datasets
+#### Dataset
 
 The dataset[5] we are using for analysis is New York City’s non-emergency service request information data. 311 provides access to City government services primarily using: Call Center, Social Media, Mobile App, Text, Video Relay and TTY/text[4].
 
