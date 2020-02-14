@@ -38,7 +38,7 @@ The dataset can be accessible from https://data.cityofnewyork.us/Social-Services
 
 The complete dataset contains data from 2010 till now and the size is around 16 GB. To ease the development of algorithm we stripped down the entire dataset into a small dataset. The development dataset contains data from August 2019.
 
-There are 41 fields in the datasets. For the initial analysis we have dropped few columns. After dropping the unnecessary columnsa and after removing the spaces from the column names, we have following columns, which we think are necessary for the implementation of our algorithm.
+There are 41 fields in the datasets. For the initial analysis we have dropped few columns. After dropping the unnecessary columns and after removing the spaces from the column names, we have following columns, which we think are necessary for the implementation of our algorithm.
 
 | Column name | Type | Details |
 |---|---|---|
@@ -49,7 +49,7 @@ There are 41 fields in the datasets. For the initial analysis we have dropped fe
 | Complaint_Type | String | Type of complaint |
 | Descriptor | String | Description of the issue |
 | Location_Type | String | Type of Location |
-| Incident_Zip | String | Zipcode |
+| Incident_Zip | String | Zip Code |
 | Address_Type | String | Type of Address  |
 | City | String | City Name  |
 | Status | String | Status of the issue |
@@ -69,16 +69,16 @@ Based on the analysis question and our initial findings we have come up with the
 #### Technologies and Algorithms
 
 1. SPARK:
-	* It is a general-purpose distributed computing engine used for processing and analyzing a large amount of data and because of size of 311 dataset, the SPARK would be best fit.
+	* It is a general-purpose distributed computing engine used for processing and analysing a large amount of data and because of size of 311 dataset, the SPARK would be best fit.
 	* Dataframe API - the Dataframe API act as distributed SQL query engine which will be used for analysis where we require to filter the dataset based on requirement.
 
-2. Supervised learning will be used to to fullfill our second objective to predict the closure time for the request. SPARKML library available regression Algorithms will be used. RMSE (Root Mean Squared Error) will be used to evaluate our Algorithms. Algorithm includes:
+2. Supervised learning will be used to fulfil our second objective to predict the closure time for the request. SPARKML library available regression Algorithms will be used. RMSE (Root Mean Squared Error) will be used to evaluate our Algorithms. Algorithm includes:
 	* Linear Regression.
 	* Decision Tree.
 	* Random Forest.
 	* Gradient boosted tree Regression.
 
-2. Unsupervised learning will be used to to fullfill our first objective to provide statistical insights:
+2. Unsupervised learning will be used to fulfil our first objective to provide statistical insights:
 	* K-Means clustering to get clusters based on longitude and latitude.
 	* To find out the optimal number of clusters, the ELBOW method will be used. The ELBOW method is a heuristic method of interpretation and validation of consistency within cluster analysis designed to help find the appropriate number of clusters in a dataset.
 
