@@ -33,12 +33,12 @@ The potential use of Open data towards developing smart cities and improving the
 
 #### Datasets
 
-The dataset we are using for analysis is New York City’s city line services and information. 311 provides access to New York City government services through eight platforms: Call Center, Social Media, Mobile App, Text, Video Relay Service and TTY/text telephone by connecting residents, business owners, and visitors with the information and people who can help them best[4].
+The dataset we are using for analysis is New York City’s non-emergency service request information data. 311 provides access to New York City government services through eight platforms: Call Center, Social Media, Mobile App, Text, Video Relay Service and TTY/text telephone by connecting residents, business owners, and visitors with the information and people who can help them best[4].
 The dataset can be accessible from https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/data
 
 The complete dataset contains data from 2010 till now and the size is around 16 GB. To ease the development of algorithm we stripped down the entire dataset into a small dataset. The development dataset contains data from August 2019.
 
-There are 41 fields in the datasets. For the initial analysis we have dropped few columns. After dropping the unnecessary column and after removing the spaces from the column names, we have following columns, which we think are necessary for the implementation of our algorithm.
+There are 41 fields in the datasets. For the initial analysis we have dropped few columns. After dropping the unnecessary columnsa and after removing the spaces from the column names, we have following columns, which we think are necessary for the implementation of our algorithm.
 
 | Column name | Type | Details |
 |---|---|---|
@@ -55,12 +55,16 @@ There are 41 fields in the datasets. For the initial analysis we have dropped fe
 | Status | String | Status of the issue |
 | Borough | String | Name of the borough  |
 | Open_Data_Channel_Type  | String | Channel of the request |
+| Latitude | float | Latitude of the location |
+| Longitude  | float | Longitude of the location |
 
-For initial data analysis, we have updated the city and borough based on the zip code. And removed all records which has no city values and the issues that are not closed.
+For initial data analysis, we have done the following cleaning in the dataset.
 
-We calculated the time taken to resolve the issue from the creation date and closing date and added the time, in a new column "Time_to_Resolve"
+	* updated the city and borough based on the zip code. 
+	* removed all records which has no city values and the issues that are not closed.
+	* calculated the time taken to resolve the issue from the creation date and closing date and added the time, in a new column "Time_to_Resolve"
 
-Based on the analysis question and our initial findings we have come up with the above modification on the dataset. 
+Based on the analysis question and our initial findings we have come up with the above modification on the dataset.
 
 #### Technologies and Algorithms
 
