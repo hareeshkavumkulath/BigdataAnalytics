@@ -29,6 +29,63 @@ With an overall motivation to offer a small subset of functionalities, a typical
 #### Related Work
 The potential use of Open data towards developing smart cities and improving the delivery of public services has already attracted a massive community of researchers and data enthusiasts. Taking reference of 311-data alone, there exists Open311 [1], a standard protocol developed for civic issue tracking. Developers of the Open311 community even offer a rich set of APIs which are being used to create their independent applications, enabling citizens to conveniently raise and track their 311 requests. In terms of analysis Sam Goodgame and Romulo Manzano from UC Berkeley present a similar analysis of NYC 311 data [2] on an AWS EC2 instance with Hadoop. In [3] authors have gone a step further by combining 311 data for the city of Miami with Census Tracts data and analysing how 311 service request patterns are associated with personal attributes and living conditions. With most of the existing studies primarily relying on Python libraries like Numpy, Pandas and Scikit Learn, throughout this paper we would be trying to baseline our results against this existing work, while relying on an Apache Spark based implementation.
 
+## Materials and Methods
+
+#### Datasets
+
+The dataset we are using for analysis is New York City’s non-emergency service request information data. 311 provides access to New York City government services through eight platforms: Call Center, Social Media, Mobile App, Text, Video Relay Service and TTY/text telephone by connecting residents, business owners, and visitors with the information and people who can help them best[4].
+The dataset can be accessible from https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/data
+
+The complete dataset contains data from 2010 till now and the size is around 16 GB. To ease the development of algorithm we stripped down the entire dataset into a small dataset. The development dataset contains data from August 2019.
+
+There are 41 fields in the datasets. For the initial analysis we have dropped few columns. After dropping the unnecessary columns and after removing the spaces from the column names, we have following columns, which we think are necessary for the implementation of our algorithm.
+
+| Column name | Type | Details |
+|---|---|---|
+| Unique_Key | String | Unique Identifier of the request |
+| Created_Date | Date | Creation Date |
+| Closed_Date | Date  | Issue Resolving Date |
+| Agency | String | Agency Type |
+| Complaint_Type | String | Type of complaint |
+| Descriptor | String | Description of the issue |
+| Location_Type | String | Type of Location |
+| Incident_Zip | String | Zip Code |
+| Address_Type | String | Type of Address  |
+| City | String | City Name  |
+| Status | String | Status of the issue |
+| Borough | String | Name of the borough  |
+| Open_Data_Channel_Type  | String | Channel of the request |
+| Latitude | float | Latitude of the location |
+| Longitude  | float | Longitude of the location |
+
+For initial data analysis, we have done the following cleaning in the dataset.
+
+	* updated the city and borough based on the zip code. 
+	* removed all records which has no city values and the issues that are not closed.
+	* calculated the time taken to resolve the issue from the creation date and closing date and added the time, in a new column "Time_to_Resolve"
+
+Based on the analysis question and our initial findings we have come up with the above modification on the dataset.
+
+#### Technologies and Algorithms
+
+1. SPARK:
+	* It is a general-purpose distributed computing engine used for processing and analysing a large amount of data and because of size of 311 dataset, the SPARK would be best fit.
+	* Dataframe API - the Dataframe API act as distributed SQL query engine which will be used for analysis where we require to filter the dataset based on requirement.
+
+2. Supervised learning will be used to fulfil our second objective to predict the closure time for the request. SPARKML library available regression Algorithms will be used. RMSE (Root Mean Squared Error) will be used to evaluate our Algorithms. Algorithm includes:
+	* Linear Regression.
+	* Decision Tree.
+	* Random Forest.
+	* Gradient boosted tree Regression.
+
+2. Unsupervised learning will be used to fulfil our first objective to provide statistical insights:
+	* K-Means clustering to get clusters based on longitude and latitude.
+	* To find out the optimal number of clusters, the ELBOW method will be used. The ELBOW method is a heuristic method of interpretation and validation of consistency within cluster analysis designed to help find the appropriate number of clusters in a dataset.
+
+
+
+
+
 #### References
 [1] OPEN311 Community. Open311. http://www.open311.org/
 
@@ -39,3 +96,5 @@ miami. https://dl.acm.org/doi/abs/10.1145/3325112.3325212
 
 [3] Romulo Manzano Sam Goodgame, David Harding.
 Analysing nyc 311 requests. http://people.ischool.berkeley.edu/˜samuel.goodgame/311/
+
+[4] https://www.ny.gov/agencies/nyc-311
