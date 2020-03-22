@@ -11,4 +11,15 @@ DROP_COLS = ['Agency Name', 'Incident Address', 'Street Name', 'Cross Street 1',
 
 FILENAME = "./311dataset/311_Service_Requests_Apr-Aug-2019.csv"
 
+RESULTS_FOLDER = "./results/"
+
 DROP_THRESHOLD = 0.5
+
+MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+
+HOUSE_HOLD_CLEANING_ISSUES = ['HEAT/HOT WATER', 'Request Large Bulky Item Collection', 'UNSANITARY CONDITION',
+                              'PLUMBING', 'PAINT/PLASTER', 'WATER LEAK']
+
+VEHICLES_AND_PARKING_ISSUE = ['Illegal Parking', 'Blocked Driveway']
+
+NOISE_ISSUES = ['Noise - Residential', 'Noise', 'Noise - Commercial']

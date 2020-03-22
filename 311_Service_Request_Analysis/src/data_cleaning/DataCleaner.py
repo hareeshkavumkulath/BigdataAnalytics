@@ -1,5 +1,5 @@
 # Python source script for any Data Cleaning related functions
-from pyspark.sql.functions import when, col, count, isnull, upper, substring, to_timestamp, unix_timestamp
+from pyspark.sql.functions import when, col, count, isnull, upper, substring, to_timestamp, unix_timestamp, lit
 from pyspark.sql.types import IntegerType
 
 import Constants
@@ -79,30 +79,19 @@ def calculate_time_to_resolve_in_seconds(df_311):
 
 
 def create_separate_day_month_year_col(df_311):
-    df_with_year = df_311.withColumn('Creation_Year', substring('Created_Date', 7, 4)).withColumn(
+    df_with_year = df_311.withColumn('Creation_Year', substring('Created_Date', 7, 4).cast(IntegerType())).withColumn(
         'Closing_Year', substring('Closed_Date', 7, 4))
 
     time_fmt = "dd/MM/yyyy HH:mm:ss"
     change_format_month = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
-                               substring('Closed_Date', 1, 2)).otherwise(substring('Closed_Date', 4, 2))
+                               substring('Closed_Date', 1, 2).cast(IntegerType())).otherwise(
+        substring('Closed_Date', 4, 2).cast(IntegerType()))
     change_format_day = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
-                             substring('Closed_Date', 4, 2)).otherwise(substring('Closed_Date', 1, 2))
+                             substring('Closed_Date', 4, 2).cast(IntegerType())).otherwise(
+        substring('Closed_Date', 1, 2).cast(IntegerType()))
 
-    df_with_month = df_with_year.withColumn('Creation_Month', substring('Created_Date', 4, 2))
+    df_with_month = df_with_year.withColumn('Creation_Month', substring('Created_Date', 4, 2).cast(IntegerType()))
     df_with_month = df_with_month.withColumn('Closing_Month', change_format_month)
-    df_with_month = df_with_month.withColumn("Creation_Month", when(col("Creation_Month") == '01', 'Jan')
-                                             .when(col("Creation_Month") == '02', 'Feb')
-                                             .when(col("Creation_Month") == '03', 'Mar')
-                                             .when(col("Creation_Month") == '04', 'Apr')
-                                             .when(col("Creation_Month") == '05', 'May')
-                                             .when(col("Creation_Month") == '06', 'Jun')
-                                             .when(col("Creation_Month") == '07', 'Jul')
-                                             .when(col("Creation_Month") == '08', 'Aug')
-                                             .when(col("Creation_Month") == '09', 'Sep')
-                                             .when(col("Creation_Month") == '10', 'Oct')
-                                             .when(col("Creation_Month") == '11', 'Nov')
-                                             .when(col("Creation_Month") == '12', 'Dec')
-                                             .otherwise('Unspecified'))
 
     df_with_day = df_with_month.withColumn('Creation_Day', substring('Created_Date', 1, 2).cast(IntegerType()))
     df_with_day = df_with_day.withColumn('Closing_Day', change_format_day)
@@ -126,3 +115,14 @@ def create_separate_day_month_year_col(df_311):
         (col('Closing_Hour') == 12) & (substring('Closing_Time', 10, 2) == 'AM'), 0).otherwise(col('Closing_Hour')))
 
     return df_with_year_month_day
+
+
+def filter_frequent_request_types(df_311):
+    df_house_hold_cleaning_issues = df_311.filter(df_311.Complaint_Type.isin(
+        Constants.HOUSE_HOLD_CLEANING_ISSUES)).withColumn('Issue_Category', lit('HOUSE_HOLD_CLEANING_ISSUES'))
+    df_noise_issues = df_311.filter(df_311.Complaint_Type.isin(Constants.NOISE_ISSUES)).withColumn('Issue_Category',
+                                                                                                   lit('NOISE_ISSUES'))
+    df_vehicles_and_parking_issues = df_311.filter(
+        df_311.Complaint_Type.isin(Constants.VEHICLES_AND_PARKING_ISSUE)).withColumn('Issue_Category',
+                                                                                     lit('VEHICLES_AND_PARKING_ISSUE'))
+    return df_house_hold_cleaning_issues.union(df_noise_issues).union(df_vehicles_and_parking_issues)
