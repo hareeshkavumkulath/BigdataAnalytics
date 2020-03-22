@@ -16,13 +16,11 @@ def get_cleaned_data():
     df_311 = DataCleaner.drop_empty_null_values(df_311)
     df_311 = DataCleaner.calculate_time_to_resolve_in_seconds(df_311)
     cleaned_df = DataCleaner.create_separate_day_month_year_col(df_311)
-    missing_value_count_df = DataCleaner.get_missing_value_count(cleaned_df)
-    utilFor311.print_df_row_as_dict(missing_value_count_df.collect()[0])
     return cleaned_df
 
 
-def run_analysis(cleaned_311_df):
-    Analysis.monthly_hourly_analysis(cleaned_311_df)
+def run_analysis(cleaned_df):
+    Analysis.monthly_hourly_analysis(cleaned_df)
 
 
 if __name__ == "__main__":

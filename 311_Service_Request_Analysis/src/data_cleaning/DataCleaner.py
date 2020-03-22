@@ -104,18 +104,25 @@ def create_separate_day_month_year_col(df_311):
                                              .when(col("Creation_Month") == '12', 'Dec')
                                              .otherwise('Unspecified'))
 
-    df_with_day = df_with_month.withColumn('Creation_Day', substring('Created_Date', 1, 2))
+    df_with_day = df_with_month.withColumn('Creation_Day', substring('Created_Date', 1, 2).cast(IntegerType()))
     df_with_day = df_with_day.withColumn('Closing_Day', change_format_day)
 
     df_with_time = df_with_day.withColumn('Creation_Time', substring('Created_Date', 12, 11)).withColumn(
         'Closing_Time', substring('Closed_Date', 12, 11))
 
-    df_with_time = df_with_time.withColumn('Creation_Hour', when(substring('Creation_Time', 10, 2) == 'AM',
-                                                                 substring('Creation_Time', 1, 2)).otherwise(
+    df_with_time = df_with_time.withColumn('Creation_Hour', when(
+        (substring('Creation_Time', 10, 2) == 'AM') | (substring('Creation_Time', 1, 2).cast(IntegerType()) == 12),
+        substring('Creation_Time', 1, 2).cast(IntegerType())).otherwise(
         substring('Creation_Time', 1, 2).cast(IntegerType()) + 12))
 
-    df_with_year_month_day = df_with_time.withColumn('Closing_Hour', when(substring('Closing_Time', 10, 2) == 'AM',
-                                                                          substring('Closing_Time', 1, 2)).otherwise(
+    df_with_time = df_with_time.withColumn('Closing_Hour', when(
+        (substring('Closing_Time', 10, 2) == 'AM') | (substring('Closing_Time', 1, 2).cast(IntegerType()) == 12),
+        substring('Closing_Time', 1, 2).cast(IntegerType())).otherwise(
         substring('Closing_Time', 1, 2).cast(IntegerType()) + 12))
+
+    df_with_time = df_with_time.withColumn('Creation_Hour', when(
+        (col('Creation_Hour') == 12) & (substring('Creation_Time', 10, 2) == 'AM'), 0).otherwise(col('Creation_Hour')))
+    df_with_year_month_day = df_with_time.withColumn('Closing_Hour', when(
+        (col('Closing_Hour') == 12) & (substring('Closing_Time', 10, 2) == 'AM'), 0).otherwise(col('Closing_Hour')))
 
     return df_with_year_month_day
