@@ -10,15 +10,20 @@ def get_missing_value_count(df_311):
     return df_311.select([count(when((isnull(c) | (col(c) == '')), c)).alias(c) for c in df_311.columns])
 
 
-def drop_unwanted_cols(df_311):
-    df_311 = df_311.drop(*Constants.DROP_COLS)
+def drop_unwanted_cols(df_311, drop_cols):
+    drop_list = [c for c in df_311.columns if c in drop_cols]
+    df_311 = df_311.drop(*drop_list)
+    return df_311
+
+
+def drop_below_threshold(df_311):
+    df_311.cache()
     df_size = df_311.count()
     missing_value_count_df = get_missing_value_count(df_311)
     missing_counts_dict = utilFor311.get_df_row_as_dict(missing_value_count_df.collect()[0])
     drop_list = [k for k, v in missing_counts_dict.items() if (v / df_size) >= Constants.DROP_THRESHOLD]
     if len(drop_list) > 0:
         return df_311.drop(*drop_list)
-    return df_311
 
 
 def remove_space_from_col_names(df_311):
@@ -71,30 +76,40 @@ def format_zip_code(df_311):
 def calculate_time_to_resolve_in_seconds(df_311):
     time_fmt = "dd/MM/yyyy HH:mm:ss"
     time_fmt2 = "MM/dd/yyyy HH:mm:ss"
-    time_diff = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(), unix_timestamp('Closed_Date',
-                                                                                         format=time_fmt2) - unix_timestamp(
-        'Created_Date', format=time_fmt)).otherwise(
-        unix_timestamp('Closed_Date', format=time_fmt) - unix_timestamp('Created_Date', format=time_fmt))
-    return df_311.withColumn("time_to_resolve", time_diff)
+    timestamp_format_col = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
+                                unix_timestamp('Closed_Date', format=time_fmt2)).otherwise(
+        unix_timestamp('Closed_Date', format=time_fmt))
+    df_311 = df_311.withColumn("Closing_timestamp", timestamp_format_col)
+    timestamp_format_col = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
+                                unix_timestamp('Created_Date', format=time_fmt2)).otherwise(
+        unix_timestamp('Created_Date', format=time_fmt))
+    df_311 = df_311.withColumn("Creation_timestamp", timestamp_format_col)
+    df_311 = df_311.withColumn("time_to_resolve_in_hrs", (col('Closing_timestamp') - col('Creation_timestamp')) / lit(
+        3600))
+    return df_311.filter(df_311["time_to_resolve_in_hrs"] > 0)
 
 
 def create_separate_day_month_year_col(df_311):
-    df_with_year = df_311.withColumn('Creation_Year', substring('Created_Date', 7, 4).cast(IntegerType())).withColumn(
-        'Closing_Year', substring('Closed_Date', 7, 4))
-
     time_fmt = "dd/MM/yyyy HH:mm:ss"
+
     change_format_month = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
                                substring('Closed_Date', 1, 2).cast(IntegerType())).otherwise(
         substring('Closed_Date', 4, 2).cast(IntegerType()))
+    df_with_month = df_311.withColumn('Closing_Month', change_format_month)
+
+    change_format_month = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
+                               substring('Created_Date', 1, 2).cast(IntegerType())).otherwise(
+        substring('Created_Date', 4, 2).cast(IntegerType()))
+    df_with_month = df_with_month.withColumn('Creation_Month', change_format_month)
+
     change_format_day = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
                              substring('Closed_Date', 4, 2).cast(IntegerType())).otherwise(
         substring('Closed_Date', 1, 2).cast(IntegerType()))
-
-    df_with_month = df_with_year.withColumn('Creation_Month', substring('Created_Date', 4, 2).cast(IntegerType()))
-    df_with_month = df_with_month.withColumn('Closing_Month', change_format_month)
-
-    df_with_day = df_with_month.withColumn('Creation_Day', substring('Created_Date', 1, 2).cast(IntegerType()))
-    df_with_day = df_with_day.withColumn('Closing_Day', change_format_day)
+    df_with_day = df_with_month.withColumn('Closing_Day', change_format_day)
+    change_format_day = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
+                             substring('Created_Date', 4, 2).cast(IntegerType())).otherwise(
+        substring('Created_Date', 1, 2).cast(IntegerType()))
+    df_with_day = df_with_day.withColumn('Creation_Day', change_format_day)
 
     df_with_time = df_with_day.withColumn('Creation_Time', substring('Created_Date', 12, 11)).withColumn(
         'Closing_Time', substring('Closed_Date', 12, 11))

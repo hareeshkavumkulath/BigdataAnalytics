@@ -2,4 +2,4 @@
 *.xml
 *.pyc
 *.log
-/311_Service_Request_Analysis/results
+/311_Service_Request_Analysis/results/*.*
