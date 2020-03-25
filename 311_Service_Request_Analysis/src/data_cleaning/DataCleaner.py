@@ -37,7 +37,7 @@ def remove_space_from_col_names(df_311):
 
 def drop_empty_null_values(df_311):
     df_311 = df_311.filter((col('City').isNotNull()) & (col('City') != "") & (col('Closed_Date').isNotNull()) & (
-            col('Closed_Date') != ""))
+            col('Closed_Date') != "") & (col('Incident_Zip').isNotNull()) & (col('Latitude').isNotNull()))
     return df_311
 
 

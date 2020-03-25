@@ -16,10 +16,10 @@ def get_cleaned_data(read_cleaned_csv):
         df_311 = DataCleaner.capitalize_cols(df_311, Constants.CAPITALIZE_COLS)
         df_311 = DataCleaner.format_zip_code(df_311)
         df_311 = DataCleaner.update_burrow_city_from_zip_code(df_311)
-        df_311 = DataCleaner.drop_unwanted_cols(df_311, Constants.DROP_COLS2)
         df_311 = DataCleaner.drop_empty_null_values(df_311)
         df_311 = DataCleaner.calculate_time_to_resolve_in_seconds(df_311)
         cleaned_df = DataCleaner.create_separate_day_month_year_col(df_311)
+        cleaned_df = utilFor311.rearrange_cols(cleaned_df)
     else:
         cleaned_df = utilFor311.read_data_from_csv("./311dataset/311_Cleaned_Data_2019.csv")
     return cleaned_df
@@ -30,6 +30,6 @@ def run_analysis(cleaned_df):
 
 
 if __name__ == "__main__":
-    read_cleaned_csv = False
-    cleaned_311_df = get_cleaned_data(read_cleaned_csv)
+    directly_read_cleaned_csv = True
+    cleaned_311_df = get_cleaned_data(directly_read_cleaned_csv)
     run_analysis(cleaned_311_df)
