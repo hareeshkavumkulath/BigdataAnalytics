@@ -22,6 +22,18 @@ def read_data_from_csv(filename):
     return nyc_311_df
 
 
+def rearrange_cols(df_311):
+    return df_311.select('Unique_Key', 'Closing_timestamp', 'Creation_timestamp',
+                         'time_to_resolve_in_hrs',
+                         'Agency', 'Agency Name', 'Open_Data_Channel_Type', 'Status',
+                         'Complaint_Type', 'Borough', 'Creation_Month',
+                         'Creation_Day', 'Creation_Hour',
+                         'Closing_Month', 'Closing_Day', 'Closing_Hour',
+                         'Issue_Category', 'Incident_Zip', 'City', 'Latitude',
+                         'Longitude', 'Created_Date',
+                         'Creation_Time', 'Closed_Date', 'Closing_Time')
+
+
 def get_df_row_as_dict(df_row):
     return df_row.asDict()
 
