@@ -14,7 +14,11 @@ DROP_COLS2 = ['Incident_Zip']
 
 FILENAME = "./311dataset/311_Service_Requests_Apr-Aug-2019.csv"
 
-RESULTS_FOLDER = "./results/"
+RESULTS_FOLDER_ANALYSIS_Q1 = "./results/Analysis/Q1/"
+RESULTS_FOLDER_ANALYSIS_Q2 = "./results/Analysis/Q2/"
+RESULTS_FOLDER_ANALYSIS_Q3 = "./results/Analysis/Q3/"
+RESULTS_FOLDER_ANALYSIS_CLUSTERING = "./results/Analysis/Clustering/"
+RESULTS_FOLDER_ANALYSIS_SUPERVISED_LEARNING = "./results/Analysis/Supervised Learning/"
 
 DROP_THRESHOLD = 0.5
 
