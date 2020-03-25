@@ -49,7 +49,7 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks=None, x_ticks
                    y_ticks_lables=None):
     plt.figure(num=fig_num, figsize=(8, 4))
 
-    plt.bar(x, y, align='center', color='grey', alpha=.5)
+    plt.bar(x, y, align='center', color='blue', alpha=.5)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -65,7 +65,14 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks=None, x_ticks
             plt.yticks(y_ticks)
 
     plt.title(title)
-    plt.savefig(Constants.RESULTS_FOLDER + str(fig_num) + '.png')
+    plt.savefig(Constants.RESULTS_FOLDER_ANALYSIS_Q2 + str(fig_num) + '.png')
+
+
+def prepare_plot(df, col_name, title, x_label, y_label, fig_num, x_ticks=None, x_ticks_lables=None, y_ticks=None,
+                 y_ticks_lables=None):
+    df_groupby_col = df.groupby(col_name).count().orderBy(col_name).collect()
+    x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_name)
+    plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks, x_ticks_lables, y_ticks, y_ticks_lables)
 
 
 def show_plot():

@@ -2,4 +2,4 @@
 *.xml
 *.pyc
 *.log
-/311_Service_Request_Analysis/results/*.*
+/311_Service_Request_Analysis/311dataset/311_Cleaned_Data_2019.csv
