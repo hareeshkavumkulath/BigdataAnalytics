@@ -1,2 +1,0 @@
-Store your visualizations and other results here in this directory.
-This is just a dummy result.
