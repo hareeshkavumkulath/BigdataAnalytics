@@ -22,8 +22,8 @@ DROP_THRESHOLD = 0.25
 MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
 
 HOUSE_HOLD_CLEANING_ISSUES = ['HEAT/HOT WATER', 'Request Large Bulky Item Collection', 'UNSANITARY CONDITION',
-                              'PLUMBING', 'PAINT/PLASTER', 'WATER LEAK']
+                              'Water System', 'PLUMBING', 'PAINT/PLASTER', 'WATER LEAK']
 
 VEHICLES_AND_PARKING_ISSUE = ['Illegal Parking', 'Blocked Driveway']
 
-NOISE_ISSUES = ['Noise - Residential', 'Noise', 'Noise - Commercial']
+NOISE_ISSUES = ['Noise - Residential', 'Noise', 'Noise - Commercial', 'Noise - Street/Sidewalk']
