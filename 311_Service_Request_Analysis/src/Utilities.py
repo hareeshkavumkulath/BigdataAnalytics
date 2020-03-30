@@ -48,6 +48,10 @@ def print_df_row_as_dict(df_row):
         print(col + ":" + str(df_row[col]))
 
 
+def list_to_dict(L):
+    return {k: v for d in L for k, v in d.items()}
+
+
 def create_x_y_coordinates_for_group_by_results(group_by_result, col_name):
     '''
     Converts Group By Result (after collect()) into list of X , Y coordinates, which can then be used for Visualizations
@@ -85,7 +89,3 @@ def prepare_plot(df, col_name, title, x_label, y_label, fig_num, x_ticks=None, x
     df_groupby_col = df.groupby(col_name).count().orderBy(col_name).collect()
     x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_name)
     plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks, x_ticks_lables, y_ticks, y_ticks_lables)
-
-
-def show_plot():
-    plt.show()
