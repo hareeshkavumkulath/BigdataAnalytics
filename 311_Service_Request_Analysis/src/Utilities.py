@@ -52,12 +52,12 @@ def list_to_dict(L):
     return {k: v for d in L for k, v in d.items()}
 
 
-def create_x_y_coordinates_for_group_by_results(group_by_result, col_name):
+def create_x_y_coordinates_for_group_by_results(group_by_result, col_x_name, col_y_name):
     '''
     Converts Group By Result (after collect()) into list of X , Y coordinates, which can then be used for Visualizations
     '''
-    x = [entry.__getitem__(col_name) for entry in group_by_result]
-    y = [entry.__getitem__("count") for entry in group_by_result]
+    x = [entry.__getitem__(col_x_name) for entry in group_by_result]
+    y = [entry.__getitem__(col_y_name) for entry in group_by_result]
     return x, y
 
 
@@ -84,8 +84,8 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks=None, x_ticks
     plt.savefig(Constants.RESULTS_FOLDER_ANALYSIS_Q2 + str(fig_num) + '.png')
 
 
-def prepare_plot(df, col_name, title, x_label, y_label, fig_num, x_ticks=None, x_ticks_lables=None, y_ticks=None,
-                 y_ticks_lables=None):
-    df_groupby_col = df.groupby(col_name).count().orderBy(col_name).collect()
-    x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_name)
+def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, x_ticks=None, x_ticks_lables=None,
+                 y_ticks=None, y_ticks_lables=None):
+    df_groupby_col = df.groupby(col_x_name).count().orderBy(col_x_name).collect()
+    x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_x_name, col_y_name)
     plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks, x_ticks_lables, y_ticks, y_ticks_lables)
