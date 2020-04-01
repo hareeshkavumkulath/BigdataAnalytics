@@ -47,9 +47,10 @@ Original dataset has 41 fields in total. Cleaning activities involved are as fol
 	* Extracting seperate columns for Day, Month, Hour of rrequest creation and closing.
 
 Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1014031*** rows
+
 Original ***2018*** Dataset has - ***2741682*** rows -> After Cleaning it had ***1097711*** rows
 
-List of 25 columns after cleaning:
+List of ***25 columns*** after cleaning:
 
 | Column name | Type | Details |
 |---|---|---|
@@ -86,19 +87,52 @@ List of 25 columns after cleaning:
 	* SPARK-SQL's Dataframe API - offering aggregate functions extensively used during the analysis phase of our study.
 
 2. Unsupervised learning - Custering will also be used as part of our intial trend analysis:
-	* Each Unique Zip Code is mapped on to a space of Complaint_Type.
-	* Each Unique Zip Code is a vector of complaint type with each value being a count of a particular complaint type that happened within that zip code.
+	* Each Unique Zip Code in the cleaned data is mapped on to a 13-D space of Complaint_Type (13 popular complaint types considered).
+	* Each Unique Zip Code is then represented aa vector of complaint type with each value being a count of a particular complaint type that happened within that zip code.
+	* Standardize the features
 	* Run K-Means clustering to get clusters of zip-codes. 
-	* ELBOW method will be used as a heuristic to identify the appropriate number of clusters in a dataset.
+	* ELBOW method used as a heuristic to identify the appropriate number of clusters in a dataset.
 
 2. Supervised learning will be used to fulfil our second objective to predict the closure time for a request.
 	* SPARK-ML offering Regression Algorithms like (Linear Regression, Random Forest, Gradient boosted tree Regression) will be evaluated and the best performing model would be selected.
 	* To start with, a 3-Fold Cross-Validation strategy would be use for hyperparameter tuning (for a few selected hyperparameters.)
 	* RMSE (Root Mean Squared Error) would initially be used to as our evaluation metric.
 
-#### Results
+#### Results and Discussion
+For a more meaningful analysis we further identified some popular complaint types out of the **367** different complaint types and continued our analysis.
+ 
+1. Trend Analysis 
+	* City wide and Boroughs wide distribution of complaints
+	* Monthly, Daily and Hourly distribution of complaints
+	* Average time to resolve the request (Department Wise)
+	
+2. Clustering - Results show for 2019 Data
+	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
+	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
+	![CostKMeans](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/CostKMeans.jpg?token=AKZR5NRRY3R3J4AXYZRRUPC6RVKIS)
+	
+	![ElbowCurve](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ElbowCurve.png?token=AKZR5NRXTXZCW2NOE6LBRTS6RVJS6)
+	
+	Based on the elbow curve shown above we arrived at **8** being the optimal number of clusters for the given dataset and Re-Ran our clustering with a predefined value of **K set to 8**.
+	
+	Resulting zipcode clusters obtained are shown in the file:
+	[CluteringResults2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringResults.txt?token=AKZR5NWTSL4VDYTSI6LGY7S6RVJXC)
+	
+	As a sanity check for our results we tried analysing one of the a clusters to see if there is any recognizable complaint trend among the zipcodes in that cluster.
+	
+	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Cluster0_Analysis.png?token=AKZR5NUWCKR33NT4CAEHXI26RVJNA)
+	
+	As per our expectations every zipcode within this cluster had the **same top 5 complaints(namely Heat/Hot Water, Illegal Parking, Blocked Driveway, Noise - Residential and Request Large Bulky Item Collection)**.
+	
+	Moreover the figures for complaint count for any specific complaint type were comparable for all the zipcodes in this cluster. **For instance Complaint_Type - "Request Large Bulky Item" had few hundred cases in each zip code of this cluster while "Heat/Hot Water" had significantly higher number of cases in every zipcode of this cluster.**
 
-#### Discussion
+	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
+	
+3. Supervised Learning 
+	* Test
+	
+#### Limitations and Future Work 
+
 
 #### References
 [1] OPEN311 Community. Open311. http://www.open311.org/
