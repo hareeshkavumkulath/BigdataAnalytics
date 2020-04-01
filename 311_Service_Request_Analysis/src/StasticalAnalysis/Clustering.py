@@ -82,7 +82,7 @@ def plot_elbow_curve(cost):
 
 
 def run_kmeans_with_optimal_number_of_cluster(final_df_kmeans):
-    opt_clusters = 6
+    opt_clusters = 8
     kmeans = KMeans().setK(opt_clusters).setSeed(123).setFeaturesCol("features")
     model = kmeans.fit(final_df_kmeans)
     return model

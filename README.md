@@ -20,7 +20,7 @@ With an overall motivation to offer a small subset of functionalities, a typical
 1. We first attempt to present some statistical insights which would allow urban policy makers to better plan their resources. For instance:
 	* “City wide and Borough wise distribution of most frequently reported complaints”, would help the authorities identify some recurring issues in specific neighbourhoods.
 	* “Most busy days/months in terms of request volumes”, would help the authorities to regulate and plan their resource ahead of time by identifying those specific days or months in a year where they have been receiving higher volume of calls.
-	* We would end the analysis by trying to run a clustering algorithm over a selected set of features(latitude and longitude) and analysing the resulting clusters for any specific patterns in neighbourhood based for a specific complaint type.
+	* We would end the analysis by trying to run a K-Means clustering algorithm over various zip codes available in the data set(Problem formulation explained in "Technologies and Algorithms used") and analysing the resulting clusters of zip codes to uncover any underlying patterns in the way complaints are being raised.
 
 2. Further we try building a predictive model with an ability to predict the closure time for a particular request. This provides a way for the policy makers to closely scrutinize the operations of the concerned department, thereby allowing easy identification of any ineffective practices.
 
@@ -34,37 +34,50 @@ Taking reference of 311-data alone, there exists Open311 [1], a standard protoco
 The dataset[5] we are using for analysis is New York City’s non-emergency service request information data. 311 provides access to City government services primarily using: Call Center, Social Media, Mobile App, Text, Video Relay and TTY/text[4].
 
 The complete dataset contains data from 2010-Present and sizes to ~17 GB. To ease the initial development we stripped down the entire dataset to a development set having data from Apr-Aug 2019.
+However once after a working pipeline was established the final results have been obtained using data from the year 2019 and 2018. 
 
-Original dataset has 41 fields in total. Some preliminary cleaning activities done to kickstart the development are as:
+Original dataset has 41 fields in total. Cleaning activities involved are as follows:
 
-	* Dropping any redundant info like Agency Name(abbreviation avaiable in Agency), Community board already captured by Burough.
+	* Dropping any redundant info like Community board (already captured by Burough) or some location specific fields like Street, Intersection or Highway.
+	* Formatting of the zip-codes (Taking only the first five characters).
 	* Updating the missing city and borough based on the zip code. 
 	* Cols with missing value count more than 1/4th of the total nummber of values.    
-	* Removing records with no city values and the issues that are not closed.
-	* Calculating the time taken to resolve the issue from the creation date and closing date.
+	* Removing records with no city values or records that do not have a closing date.
+	* Calculating the "time taken to resolve the issue in hours" after standardizing creation and closing date.
+	* Extracting seperate columns for Day, Month, Hour of rrequest creation and closing.
 
-###### *Note: This by far is not an exhaustive list of cleaning activities done and would be updated as we progess in the development.
+Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1014031*** rows
+Original ***2018*** Dataset has - ***2741682*** rows -> After Cleaning it had ***1097711*** rows
 
-Cleaned dataset so far has ~33K records with the following cols.
+List of 25 columns after cleaning:
 
 | Column name | Type | Details |
 |---|---|---|
-| Unique_Key | String | Unique Identifier of the request |
-| Created_Date | Date | Creation Date |
-| Closed_Date | Date  | Issue Resolving Date |
-| Agency | String | Agency Type |
-| Complaint_Type | String | Type of complaint |
-| Descriptor | String | Description of the issue |
-| Location_Type | String | Type of Location |
-| Incident_Zip | String | Zip Code |
-| Address_Type | String | Type of Address  |
-| City | String | City Name  |
-| Status | String | Status of the issue |
-| Borough | String | Name of the borough  |
-| Open_Data_Channel_Type  | String | Channel of the request |
+| Unique_Key | string | Unique Identifier of the request |
+| Closing_timestamp | bigint | Unix timestamp for the request closure |
+| Creation_timestamp | bigint | Unix timestamp for the request creation |
+| time_to_resolve_in_hrs | double | time to resolve the issue in hours |
+| Agency | string | Department Abbreviation |
+| Agency_Name | string | Department Full Name |
+| Open_Data_Channel_Type  | string | Channel of the request |
+| Status | string | Status of the issue |
+| Complaint_Type | string | Type of complaint |
+| Borough | string | Name of the borough  |
+| Creation_Month | int | Month on which the issue was created |
+| Creation_Day | int | Day of the Month on which the issue was created |
+| Creation_Hour | int | Hour of the day on which the issue was created |
+| Closing_Month | int | Month on which the issue was closed |
+| Closing_Day | int | Day of the Month on which the issue was closed |
+| Closing_Hour | int | Hour of the day on which the issue was closed |
+| Issue_Category | string | Household-Cleaning, Noise, Vehicle-Parking |
+| Incident_Zip | string | Zip Code |
+| City | string | City Name  |
 | Latitude | float | Latitude of the location |
 | Longitude  | float | Longitude of the location |
-
+| Created_Date | string  | Creation Date of the issue |
+| Creation_Time | string  | Creation Time of the issue |
+| Closed_Date | string  | Closing Date of the issue |
+| Closing_Time | string  | Closing Time of the issue |
 
 #### Technologies and Algorithms used
 
@@ -73,7 +86,9 @@ Cleaned dataset so far has ~33K records with the following cols.
 	* SPARK-SQL's Dataframe API - offering aggregate functions extensively used during the analysis phase of our study.
 
 2. Unsupervised learning - Custering will also be used as part of our intial trend analysis:
-	* K-Means clustering to get clusters based on longitude and latitude. 
+	* Each Unique Zip Code is mapped on to a space of Complaint_Type.
+	* Each Unique Zip Code is a vector of complaint type with each value being a count of a particular complaint type that happened within that zip code.
+	* Run K-Means clustering to get clusters of zip-codes. 
 	* ELBOW method will be used as a heuristic to identify the appropriate number of clusters in a dataset.
 
 2. Supervised learning will be used to fulfil our second objective to predict the closure time for a request.
@@ -81,6 +96,9 @@ Cleaned dataset so far has ~33K records with the following cols.
 	* To start with, a 3-Fold Cross-Validation strategy would be use for hyperparameter tuning (for a few selected hyperparameters.)
 	* RMSE (Root Mean Squared Error) would initially be used to as our evaluation metric.
 
+#### Results
+
+#### Discussion
 
 #### References
 [1] OPEN311 Community. Open311. http://www.open311.org/

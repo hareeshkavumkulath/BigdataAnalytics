@@ -32,6 +32,7 @@ def remove_space_from_col_names(df_311):
             .withColumnRenamed('Due Date', 'Due_Date').withColumnRenamed('Address Type', 'Address_Type')
             .withColumnRenamed('Location Type', 'Location_Type').withColumnRenamed('Incident Zip', 'Incident_Zip')
             .withColumnRenamed('Complaint Type', 'Complaint_Type')
+            .withColumnRenamed('Agency Name', 'Agency_Name')
             .withColumnRenamed('Open Data Channel Type', 'Open_Data_Channel_Type'))
 
 
