@@ -111,16 +111,16 @@ For a more meaningful analysis we further identified some popular complaint type
 	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
 	![CostKMeans](https://drive.google.com/uc?export=view&id=1xFMw18JYOikLEZc4jK9X-CL7n4hbJ9Qc)
 	
-	![ElbowCurve](https://drive.google.com/uc?export=view&id=1QhJgu1loBFDh9h56vMgQ1TmKXFyV8qi6)
+	![ElbowCurve](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ElbowCurve.png?token=AKZR5NRXTXZCW2NOE6LBRTS6RVJS6)
 	
 	Based on the elbow curve shown above we arrived at **8** being the optimal number of clusters for the given dataset and Re-Ran our clustering with a predefined value of **K set to 8**.
 	
 	Resulting zipcode clusters obtained are shown in the file:
-	https://drive.google.com/uc?export=view&id=1-3Dmz-TqUOEBmUjED2auags29tbTFLih
+	[CluteringResults2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringResults.txt?token=AKZR5NWTSL4VDYTSI6LGY7S6RVJXC)
 	
 	As a sanity check for our results we tried analysing one of the a clusters to see if there is any recognizable complaint trend among the zipcodes in that cluster.
 	
-	![CluterAnalysis](https://drive.google.com/uc?export=view&id=1WiCT8UUSWDhYuEDFI896x1iOddmsSwTx)
+	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Cluster0_Analysis.png?token=AKZR5NUWCKR33NT4CAEHXI26RVJNA)
 	
 	As per our expectations every zipcode within this cluster had the **same top 5 complaints(namely Heat/Hot Water, Illegal Parking, Blocked Driveway, Noise - Residential and Request Large Bulky Item Collection)**.
 	
