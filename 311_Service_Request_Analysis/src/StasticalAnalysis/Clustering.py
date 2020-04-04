@@ -102,8 +102,12 @@ def save_clustering_results(zip_code_clusters):
     op_string = ""
     for entry in zip_code_clusters:
         cluster = entry.__getitem__('Cluster')
-        zip_codes = entry.__getitem__('Zip_Codes')
-        op_string = op_string + 'Zip Codes in Cluster: ' + str(cluster) + os.linesep + str(zip_codes)[1:-1] + os.linesep
+        zip_codes_list = entry.__getitem__('Zip_Codes')
+        zip_codes = ""
+        for zip_code in zip_codes_list:
+            if len(str(zip_code).strip()) == 7:
+                zip_codes = zip_codes + str(zip_code)[0:5] + ', '
+        op_string = op_string + 'Zip Codes in Cluster: ' + str(cluster) + os.linesep + zip_codes[0:-2] + os.linesep
     filename = Constants.RESULTS_FOLDER_ANALYSIS_CLUSTERING + "ClusteringResults.txt"
     text_file = open(filename, "w")
     text_file.write(op_string)
