@@ -115,21 +115,21 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
 		
-			![NoiseHourly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018.JPG?token=AKZR5NQ6JECKRMAKFVTK5IK6SHUDU) 
-			
-			![NoiseHourly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2019.JPG?token=AKZR5NXPH4YMQDCQDTSIG6S6SHUHS)
+		![NoiseHourly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018.JPG?token=AKZR5NQ6JECKRMAKFVTK5IK6SHUDU) 
+		
+		![NoiseHourly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2019.JPG?token=AKZR5NXPH4YMQDCQDTSIG6S6SHUHS)
 		
 		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
 		
-			![ParkingDaily2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018.JPG?token=AKZR5NU6SROGRFILHH4SWJ26SHUXO)
+		![ParkingDaily2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018.JPG?token=AKZR5NU6SROGRFILHH4SWJ26SHUXO)
 
-			![ParkingDaily2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2019.JPG?token=AKZR5NRAIWBGWLXHB432LJS6SHU3M)
+		![ParkingDaily2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2019.JPG?token=AKZR5NRAIWBGWLXHB432LJS6SHU3M)
 	
 		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
 		
-			![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018.JPG?token=AKZR5NX4FP4XHCFKTWJD6TK6SHU5Q)
+		![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018.JPG?token=AKZR5NX4FP4XHCFKTWJD6TK6SHU5Q)
 
-			![NoiseMonthly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2019.JPG?token=AKZR5NSCWF7YB3KDDFNIEHS6SHVBK)	
+		![NoiseMonthly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2019.JPG?token=AKZR5NSCWF7YB3KDDFNIEHS6SHVBK)	
 
 	* Average time to resolve the request (Department Wise)
 		* **To be done**
@@ -139,6 +139,7 @@ For a more meaningful analysis out of the **367** different complaint types we s
 2. Clustering - Results show for 2019 Data
 	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
 	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
+	
 	![CostKMeans](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/CostKMeans.jpg?token=AKZR5NRRY3R3J4AXYZRRUPC6RVKIS)
 	
 	![ElbowCurve](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ElbowCurve.png?token=AKZR5NRXTXZCW2NOE6LBRTS6RVJS6)
