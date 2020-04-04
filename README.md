@@ -110,15 +110,20 @@ For a more meaningful analysis out of the **367** different complaint types we s
 1. Trend Analysis : To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
  
 	* City wide and Boroughs wide distribution of complaints
-	
+		* **To be done**
+		
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night. 
+	![NoiseComparisionHourly](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseCompareHourly.JPG?token=AKZR5NX3736HJS4AODXQQOK6SFCCY)
 		
 		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
-		
+	![ParkingComparisiondaily](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDailyCompare.JPG?token=AKZR5NVHYOA4VMRYFWEJPVS6SFCHY)
+	
 		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August. 
-		
+	![NoiseComparisionMonthly](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseCompareMonthly.JPG?token=AKZR5NQS2WTD2UPPG4FZ3PS6SFCI2)
+	
 	* Average time to resolve the request (Department Wise)
+		* **To be done**
 	
 **Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
@@ -136,7 +141,7 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	
 	As a sanity check for our results we tried analysing one of the a clusters to see if there is any recognizable complaint trend among the zipcodes in that cluster.
 	
-	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Cluster0_Analysis.png?token=AKZR5NUWCKR33NT4CAEHXI26RVJNA)
+	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Analysis_Cluster_2.JPG?token=AKZR5NXAJL2KD6GTVEM3U5C6SFB4U)
 	
 	As per our expectations every zipcode within this cluster had the **same top 5 complaints(namely Heat/Hot Water, Illegal Parking, Blocked Driveway, Noise - Residential and Request Large Bulky Item Collection)**.
 	
@@ -144,11 +149,31 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
-3. Supervised Learning 
-	* Test
+3. Supervised Learning
+	* **To be done**
 	
-#### Limitations and Future Work 
+#### Limitations and Future Work
+	
+	**To be done**
 
+#### Instructions to run the project
+	* Download the Project Directory to your loacl machine - "311_Service_Request_Analysis"
+	
+	* Navigate to '\311_Service_Request_Analysis\src' in your terminal
+	
+	* Run CMD:
+		python Launcher.py "./311dataset/311_Cleaned_Data_Small.csv" True
+	
+	* CMD accepts 2 command line parameters:
+		
+		a) "./311dataset/311_Service_Requests_Apr-Aug-2019.csv" - Path of the dataset to read.
+		
+		*Note: The committed dataset is a small development set.
+		
+		Actual dataset can be downloaded from:
+		[Actual 2018 and 2019 Cleaned Dataset](https://drive.google.com/drive/folders/1MJLL9A0rSUKeLnUFSA5x0XfQuCwTV-yG?usp=sharing)
+		
+		b) True/False -> True - Given Input CSV is cleaned data and no need to pre-process it again. False - Given Input CSV is un-cleaned data so we need to run it through the pre-processing pipeline.
 
 #### References
 [1] OPEN311 Community. Open311. http://www.open311.org/
