@@ -12,6 +12,7 @@ def complaint_type_analysis(complaint_type_df):
 def monthly_hourly_analysis(df_with_month_hour):
     # Insight 2 : Daily, Hourly, Monthly Analysis
     df_with_month_hour.cache()
+    creation_year = df_with_month_hour.select("Created_Date").take(1)[0].__getitem__("Created_Date")[6:10]
     df_with_month_hour = df_with_month_hour.withColumn("Creation_Hour",
                                                        df_with_month_hour["Creation_Hour"].cast(IntegerType()))
     df_with_month_hour = df_with_month_hour.withColumn("Creation_Month",
@@ -27,35 +28,37 @@ def monthly_hourly_analysis(df_with_month_hour):
 
     # Hourly
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Hour', 'count',
-                            "Cleaning & Household Complaints count hourly basis",
-                            "Hour", "Count", 1, range(0, 24, 1))
-    utilFor311.prepare_plot(df_noise_issues, 'Creation_Hour', 'count', "Noise Complaints count hourly basis", "Hour",
-                            "Count", 2,
-                            range(0, 24, 1))
+                            "Cleaning & Household Complaints count hourly basis. Year-" + str(creation_year),
+                            "Hour", 'Total Count (across the year)', 1, range(0, 24, 1))
+    utilFor311.prepare_plot(df_noise_issues, 'Creation_Hour', 'count',
+                            "Noise Complaints count hourly basis. Year-" + str(creation_year), "Hour",
+                            'Total Count (across the year)', 2, range(0, 24, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Hour', 'count',
-                            "Vehicle and Parking Complaints count hourly basis",
-                            "Hour", "Count", 3, range(0, 24, 1))
+                            "Vehicle and Parking Complaints count hourly basis. Year-" + str(creation_year),
+                            "Hour", 'Total Count (across the year)', 3, range(0, 24, 1))
     # Daily
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Day', 'count',
-                            "Cleaning & Household Complaints count daily basis", "Day", "Count", 4, range(1, 32, 1))
-    utilFor311.prepare_plot(df_noise_issues, 'Creation_Day', 'count', "Noise Complaints count daily basis", "Day",
-                            "Count", 5,
+                            "Cleaning & Household Complaints count daily basis. Year-" + str(creation_year), "Day",
+                            'Total Count (across the year)', 4, range(1, 32, 1))
+    utilFor311.prepare_plot(df_noise_issues, 'Creation_Day', 'count',
+                            "Noise Complaints count daily basis", "Day",
+                            'Total Count (across the year)', 5,
                             range(1, 32, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Day', 'count',
-                            "Vehicle and Parking Complaints count daily basis", "Day", "Count", 6, range(1, 32, 1))
+                            "Vehicle and Parking Complaints count daily basis. Year-" + str(creation_year), "Day",
+                            'Total Count (across the year)', 6, range(1, 32, 1))
 
     # Monthly
     months = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Month', 'count',
-                            "Cleaning & Household Complaints count monthly basis",
-                            "Month", "Count", 7, range(1, 13, 1), months)
-    utilFor311.prepare_plot(df_noise_issues, 'Creation_Month', 'count', "Noise Complaints count monthly basis", "Month",
-                            "Count",
-                            8,
-                            range(1, 13, 1), months)
+                            "Cleaning & Household Complaints count monthly basis. Year-" + str(creation_year),
+                            "Month", 'Total Count (across the year)', 7, range(1, 13, 1), months)
+    utilFor311.prepare_plot(df_noise_issues, 'Creation_Month', 'count',
+                            "Noise Complaints count monthly basis. Year-" + str(creation_year), "Month",
+                            'Total Count (across the year)', 8, range(1, 13, 1), months)
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Month', 'count',
-                            "Vehicle and Parking Complaints count monthly basis",
-                            "Month", "Count", 9, range(1, 13, 1), months)
+                            "Vehicle and Parking Complaints count monthly basis. Year-" + str(creation_year),
+                            "Month", 'Total Count (across the year)', 9, range(1, 13, 1), months)
 
 
 def resolution_time_analysis():
