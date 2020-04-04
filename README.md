@@ -34,17 +34,17 @@ Taking reference of 311-data alone, there exists Open311 [1], a standard protoco
 The dataset[5] we are using for analysis is New York City’s non-emergency service request information data. 311 provides access to City government services primarily using: Call Center, Social Media, Mobile App, Text, Video Relay and TTY/text[4].
 
 The complete dataset contains data from 2010-Present and sizes to ~17 GB. To ease the initial development we stripped down the entire dataset to a development set having data from Apr-Aug 2019.
-However once after a working pipeline was established the final results have been obtained using data from the year 2019 and 2018. 
+However once after a working pipeline was established the final results have been obtained using full dataset from the year 2018 and 2019. 
 
 Original dataset has 41 fields in total. Cleaning activities involved are as follows:
 
-	* Dropping any redundant info like Community board (already captured by Burough) or some location specific fields like Street, Intersection or Highway.
+	* Dropping any redundant info like Community board (already captured by Borough) or some location specific fields like Street, Intersection or Highway.
 	* Formatting of the zip-codes (Taking only the first five characters).
 	* Updating the missing city and borough based on the zip code. 
-	* Cols with missing value count more than 1/4th of the total nummber of values.    
+	* Cols with missing value count more than 1/4th of the total number of values.    
 	* Removing records with no city values or records that do not have a closing date.
 	* Calculating the "time taken to resolve the issue in hours" after standardizing creation and closing date.
-	* Extracting seperate columns for Day, Month, Hour of rrequest creation and closing.
+	* Extracting separate columns for Day, Month, Hour of request creation and closing.
 
 Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1014031*** rows
 
@@ -86,25 +86,41 @@ List of ***25 columns*** after cleaning:
 	* Distributed data processing platform used. Actual size of the continuously updated 311 dataset, makes SPARK a good fit for its processing.
 	* SPARK-SQL's Dataframe API - offering aggregate functions extensively used during the analysis phase of our study.
 
-2. Unsupervised learning - Custering will also be used as part of our intial trend analysis:
+2. Unsupervised learning - Clustering was also used as part of our initial trend analysis:
 	* Each Unique Zip Code in the cleaned data is mapped on to a 13-D space of Complaint_Type (13 popular complaint types considered).
-	* Each Unique Zip Code is then represented aa vector of complaint type with each value being a count of a particular complaint type that happened within that zip code.
+	* Each Unique Zip Code is then represented as a vector of complaint type with each value being a count of a particular complaint type occuring within that zip code.
 	* Standardize the features
 	* Run K-Means clustering to get clusters of zip-codes. 
 	* ELBOW method used as a heuristic to identify the appropriate number of clusters in a dataset.
 
 2. Supervised learning will be used to fulfil our second objective to predict the closure time for a request.
 	* SPARK-ML offering Regression Algorithms like (Linear Regression, Random Forest, Gradient boosted tree Regression) will be evaluated and the best performing model would be selected.
-	* To start with, a 3-Fold Cross-Validation strategy would be use for hyperparameter tuning (for a few selected hyperparameters.)
-	* RMSE (Root Mean Squared Error) would initially be used to as our evaluation metric.
+	* To start with, a 3-Fold Cross-Validation strategy would be used for hyperparameter tuning (for a few selected hyperparameters.)
+	* RMSE (Root Mean Squared Error) would initially be used as our evaluation metric.
 
 #### Results and Discussion
-For a more meaningful analysis we further identified some popular complaint types out of the **367** different complaint types and continued our analysis.
+For a more meaningful analysis out of the **367** different complaint types we shortlisted **13** popular complaint types under 3 categories:
+
+**(Type-A) HOUSE_HOLD_CLEANING_ISSUES** = *'HEAT/HOT WATER', 'Request Large Bulky Item Collection', 'UNSANITARY CONDITION', 'Water System', 'PLUMBING', 'PAINT/PLASTER', 'WATER LEAK'*
+
+**(Type-B) VEHICLES_AND_PARKING_ISSUE** = *'Illegal Parking', 'Blocked Driveway'* 
+
+**(Type-C) NOISE_ISSUES** = *'Noise - Residential', 'Noise', 'Noise - Commercial', 'Noise - Street/Sidewalk'*
+
+1. Trend Analysis : To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
  
-1. Trend Analysis 
 	* City wide and Boroughs wide distribution of complaints
+	
 	* Monthly, Daily and Hourly distribution of complaints
+		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night. 
+		
+		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
+		
+		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August. 
+		
 	* Average time to resolve the request (Department Wise)
+	
+**Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
 2. Clustering - Results show for 2019 Data
 	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
