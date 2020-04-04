@@ -32,7 +32,10 @@ def get_cleaned_data(read_cleaned_csv, file_name):
 
 def run_analysis(cleaned_df):
     # Trend based questions
+    Analysis.complaint_type_analysis(cleaned_df)
     Analysis.monthly_hourly_analysis(cleaned_df)
+    Analysis.resolution_time_analysis(cleaned_df)
+    Analysis.request_mode_analysis(cleaned_df)
 
     # Supervised Learning
 

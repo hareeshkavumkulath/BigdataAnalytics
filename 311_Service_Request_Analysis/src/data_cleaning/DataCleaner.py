@@ -32,6 +32,7 @@ def remove_space_from_col_names(df_311):
             .withColumnRenamed('Due Date', 'Due_Date').withColumnRenamed('Address Type', 'Address_Type')
             .withColumnRenamed('Location Type', 'Location_Type').withColumnRenamed('Incident Zip', 'Incident_Zip')
             .withColumnRenamed('Complaint Type', 'Complaint_Type')
+            .withColumnRenamed('Agency Name', 'Agency_Name')
             .withColumnRenamed('Open Data Channel Type', 'Open_Data_Channel_Type'))
 
 
@@ -74,15 +75,15 @@ def format_zip_code(df_311):
 
 
 def calculate_time_to_resolve_in_seconds(df_311):
-    time_fmt = "dd/MM/yyyy HH:mm:ss"
-    time_fmt2 = "MM/dd/yyyy HH:mm:ss"
-    timestamp_format_col = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
+    time_fmt1 = "MM/dd/yyyy HH:mm:ss"
+    time_fmt2 = "dd/MM/yyyy HH:mm:ss"
+    timestamp_format_col = when(to_timestamp(df_311.Closed_Date, time_fmt1).isNull(),
                                 unix_timestamp('Closed_Date', format=time_fmt2)).otherwise(
-        unix_timestamp('Closed_Date', format=time_fmt))
+        unix_timestamp('Closed_Date', format=time_fmt1))
     df_311 = df_311.withColumn("Closing_timestamp", timestamp_format_col)
-    timestamp_format_col = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
+    timestamp_format_col = when(to_timestamp(df_311.Created_Date, time_fmt1).isNull(),
                                 unix_timestamp('Created_Date', format=time_fmt2)).otherwise(
-        unix_timestamp('Created_Date', format=time_fmt))
+        unix_timestamp('Created_Date', format=time_fmt1))
     df_311 = df_311.withColumn("Creation_timestamp", timestamp_format_col)
     df_311 = df_311.withColumn("time_to_resolve_in_hrs", (col('Closing_timestamp') - col('Creation_timestamp')) / lit(
         3600))
@@ -90,25 +91,25 @@ def calculate_time_to_resolve_in_seconds(df_311):
 
 
 def create_separate_day_month_year_col(df_311):
-    time_fmt = "dd/MM/yyyy HH:mm:ss"
+    time_fmt = "MM/dd/yyyy HH:mm:ss"
 
     change_format_month = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
-                               substring('Closed_Date', 1, 2).cast(IntegerType())).otherwise(
-        substring('Closed_Date', 4, 2).cast(IntegerType()))
+                               substring('Closed_Date', 4, 2).cast(IntegerType())).otherwise(
+        substring('Closed_Date', 1, 2).cast(IntegerType()))
     df_with_month = df_311.withColumn('Closing_Month', change_format_month)
 
     change_format_month = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
-                               substring('Created_Date', 1, 2).cast(IntegerType())).otherwise(
-        substring('Created_Date', 4, 2).cast(IntegerType()))
+                               substring('Created_Date', 4, 2).cast(IntegerType())).otherwise(
+        substring('Created_Date', 1, 2).cast(IntegerType()))
     df_with_month = df_with_month.withColumn('Creation_Month', change_format_month)
 
     change_format_day = when(to_timestamp(df_311.Closed_Date, time_fmt).isNull(),
-                             substring('Closed_Date', 4, 2).cast(IntegerType())).otherwise(
-        substring('Closed_Date', 1, 2).cast(IntegerType()))
+                             substring('Closed_Date', 1, 2).cast(IntegerType())).otherwise(
+        substring('Closed_Date', 4, 2).cast(IntegerType()))
     df_with_day = df_with_month.withColumn('Closing_Day', change_format_day)
     change_format_day = when(to_timestamp(df_311.Created_Date, time_fmt).isNull(),
-                             substring('Created_Date', 4, 2).cast(IntegerType())).otherwise(
-        substring('Created_Date', 1, 2).cast(IntegerType()))
+                             substring('Created_Date', 1, 2).cast(IntegerType())).otherwise(
+        substring('Created_Date', 4, 2).cast(IntegerType()))
     df_with_day = df_with_day.withColumn('Creation_Day', change_format_day)
 
     df_with_time = df_with_day.withColumn('Creation_Time', substring('Created_Date', 12, 11)).withColumn(
