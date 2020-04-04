@@ -113,15 +113,24 @@ For a more meaningful analysis out of the **367** different complaint types we s
 		* **To be done**
 		
 	* Monthly, Daily and Hourly distribution of complaints
-		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night. 
-	![NoiseComparisionHourly](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseCompareHourly.JPG?token=AKZR5NX3736HJS4AODXQQOK6SFCCY)
+		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
+		
+			![NoiseHourly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018.JPG?token=AKZR5NQ6JECKRMAKFVTK5IK6SHUDU) 
+			
+			![NoiseHourly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2019.JPG?token=AKZR5NXPH4YMQDCQDTSIG6S6SHUHS)
 		
 		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
-	![ParkingComparisiondaily](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDailyCompare.JPG?token=AKZR5NVHYOA4VMRYFWEJPVS6SFCHY)
+		
+			![ParkingDaily2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018.JPG?token=AKZR5NU6SROGRFILHH4SWJ26SHUXO)
+
+			![ParkingDaily2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2019.JPG?token=AKZR5NRAIWBGWLXHB432LJS6SHU3M)
 	
-		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August. 
-	![NoiseComparisionMonthly](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseCompareMonthly.JPG?token=AKZR5NQS2WTD2UPPG4FZ3PS6SFCI2)
-	
+		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
+		
+			![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018.JPG?token=AKZR5NX4FP4XHCFKTWJD6TK6SHU5Q)
+
+			![NoiseMonthly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2019.JPG?token=AKZR5NSCWF7YB3KDDFNIEHS6SHVBK)	
+
 	* Average time to resolve the request (Department Wise)
 		* **To be done**
 	
