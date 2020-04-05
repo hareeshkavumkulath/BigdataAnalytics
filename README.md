@@ -135,10 +135,8 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
 	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
 	
-	![CostKMeans](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/CostKMeans.jpg?token=AKZR5NRRY3R3J4AXYZRRUPC6RVKIS)
-	
-	![ElbowCurve](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ElbowCurve.png?token=AKZR5NRXTXZCW2NOE6LBRTS6RVJS6)
-	
+	![CostKMeans_Elbow](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringCostAndElbow.JPG?token=AKZR5NXUIG5HGSOJEDAGYR26SMPOO)
+		
 	Based on the elbow curve shown above we arrived at **8** being the optimal number of clusters for the given dataset and Re-Ran our clustering with a predefined value of **K set to 8**.
 	
 	Resulting zipcode clusters obtained are shown in the file:
