@@ -160,7 +160,13 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
 3. Supervised Learning
-	* **To be done**
+	* Add any additional cleaning steps you have taken apart from above mentioned steps.
+	* What features you selected.
+	* Importance level of each feature that contributes to the final model.
+	* Train-Test Split Ratio.
+	* Hyperparameters selected for each model while using 3-Fold Cross-Validation.
+	* RMSE scores on Training and Test Data for each Model
+	* Best Regressor Model selected based on RMSE.
 	
 #### Limitations and Future Work
 	
