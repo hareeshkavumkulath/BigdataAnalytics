@@ -96,5 +96,31 @@ def monthly_hourly_analysis(df_with_month_hour):
                             "Month", 'Total Count (across the year)', 9, results_folder, range(1, 13, 1), months)
 
 
-def resolution_time_analysis():
-    return None
+def get_top_agencies(df):
+    agencies = df.select("Agency").distinct().collect()
+    top_agencies = []
+    for item in agencies:
+        top_agencies.append(item[0])
+    return top_agencies
+
+
+def complaint_type_to_time_resolve(df_with_time_to_resolve, creation_year):
+    results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q3
+    top_agencies = get_top_agencies(df_with_time_to_resolve)
+    all_agency_time_to_resolve = df_with_time_to_resolve.select('Complaint_Type', 'Agency',
+                                                                df_with_time_to_resolve.time_to_resolve_in_hrs.cast(
+                                                                    'float').alias('time_to_resolve_in_hrs'))
+    fig_num = 1
+    for i in range(len(top_agencies)):
+        utilFor311.prepare_plot(
+            all_agency_time_to_resolve.filter(all_agency_time_to_resolve["Agency"] == top_agencies[i]),
+            'Complaint_Type', 'time_to_resolve_in_hrs',
+            "Agency: " + top_agencies[i] + " average completion time for year " + str(creation_year),
+            "Complaint_Type", "Average time_to_resolve_in_hrs", fig_num, results_folder, x_tick_rotation='vertical',
+            is_count=False)
+        fig_num += 1
+
+
+def resolution_time_analysis(df_with_time_to_resolve):
+    creation_year = get_creation_year(df_with_time_to_resolve)
+    complaint_type_to_time_resolve(df_with_time_to_resolve, creation_year)

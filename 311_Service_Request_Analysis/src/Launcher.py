@@ -34,19 +34,18 @@ def run_analysis(cleaned_df):
     # Trend based questions
     Analysis.complaint_type_analysis(cleaned_df)
     Analysis.monthly_hourly_analysis(cleaned_df)
-    #Analysis.resolution_time_analysis(cleaned_df)
-    #Analysis.request_mode_analysis(cleaned_df)
-
-    # Supervised Learning
+    Analysis.resolution_time_analysis(cleaned_df)
 
     # Clustering
-    #df_kmeans = Clustering.prepare_data_for_clustering(cleaned_df)
-    #final_df_kmeans = Clustering.prepare_feature_vector(df_kmeans)
-    #model_costs = Clustering.run_k_means(final_df_kmeans)
-    #Clustering.plot_elbow_curve(model_costs)
-    #model = Clustering.run_kmeans_with_optimal_number_of_cluster(final_df_kmeans)
-    #zip_code_clusters = Clustering.get_zip_code_assignment_to_clusters(model, final_df_kmeans)
-    #Clustering.save_clustering_results(zip_code_clusters)
+    df_kmeans = Clustering.prepare_data_for_clustering(cleaned_df)
+    final_df_kmeans = Clustering.prepare_feature_vector(df_kmeans)
+    model_costs = Clustering.run_k_means(final_df_kmeans)
+    Clustering.plot_elbow_curve(model_costs)
+    model = Clustering.run_kmeans_with_optimal_number_of_cluster(final_df_kmeans)
+    zip_code_clusters = Clustering.get_zip_code_assignment_to_clusters(model, final_df_kmeans)
+    Clustering.save_clustering_results(zip_code_clusters)
+
+    # Supervised Learning
 
 
 if __name__ == "__main__":
