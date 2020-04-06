@@ -114,42 +114,13 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 		![Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Overall.png?token=AKL5YZ6CUVLB65ZTRM362IS6SOGK4)
 
-		From the graph it is evident that, in the year 2018 and in 2019 the most number of complaints received for Residential Noise and Heat/Hot Water issue. The least number of complaints obtained in both years are for Water Leak.
-
-		* Borough Wise Comparisons of Complaint Type Distribution.
+		From the graph it is evident that, in the year 2018 and in 2019 the most number of complaints received for Heat/Hot Water issues and Residential Noise. There were more than 200,000 complaints related to Heat/Hot water, while In 2019 the residential noise complaints were higher than 2018. In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019. Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
 
 		Following are the major boroughs which reported at least 5000 complaints.
 
-		a. Queens
+		![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
 
-		![Queens_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Queens.png?token=AKL5YZZLUKWK7OM6XXUTC4C6SOHRG)
-
-		Most complaints recieved in Queens in the year 2019 is from Illegal Parking and in 2018 it was Request Large Bulky Item Collection, while the least complaints were from Water Leak.
-
-		b. Brooklyn
-
-		![Brooklyn_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Brooklyn.png?token=AKL5YZ6BCFAB6KKR5J3NXWK6SOHU2)
-
-		In Brooklyn in the year 2019 the most complaints received for Heat/Hot Water and Residential Noise, while in the year 2018 the most complaints were from same type and also from Request Large Bulky Item Collection. In both years, the least complaints were for Water Leak.
-
-		c. Bronx
-
-		![Bronx_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Bronx.png?token=AKL5YZ47NLPQ5NQDAUYQNMC6SOHZU)
-
-		In Bronx, Hot water issues were really common in both 2018 and 2019, and in both years there were less number of Noise issues. 
-
-		d. Manhattan
-
-		![Manhattan_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Manhattan.png?token=AKL5YZY5MAUM4FJI4MBI57C6SOH4K)
-
-		In Manhattan the least reported issue was Blocked Driveway in both years. And Hot water issues and Residential Noise issues were the most reported complaint types.
-
-		e. Staten Island
-
-		![Staten_Island_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/StatenIsland.png?token=AKL5YZYBRGAUUBCD4CWDOMC6SOH7K)
-
-		In Staten Island, Illegal Parking was the most reported complaints while it was the issues with the Large Bulky Item Collection in the year 2018. In both years the water leak issues were the least reported complaints.
-
+		Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. While in Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
 		
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
@@ -166,7 +137,14 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 
 	* Average time to resolve the request (Department Wise)
-		* **To be done**
+		
+		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Overall.png?token=AKL5YZ7FIOOS5DGVN4TJXGS6SQDUU)
+
+		In both years 2018 and 2019 it takes more than 400hrs to fix the Unsanitary Condition issues. Other issues like water leak, Plumbing, Paint/Plaster, Request Large Bulky Item Collection took same amount of time in both years. Where the time taken for fixing the Water System issues is considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs. For all other issues the time to resolve the issues is same in both years. Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
+
+		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
+
+		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Agency.png?token=AKL5YZ7LZJ6ZWMI2MIAXFFK6SQEII)
 	
 **Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
