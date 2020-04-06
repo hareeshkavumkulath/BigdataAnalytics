@@ -119,6 +119,8 @@ For a more meaningful analysis out of the **367** different complaint types we s
 		Following are the major boroughs which reported at least 5000 complaints.
 
 		![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
+
+		Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. While in Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
 		
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
