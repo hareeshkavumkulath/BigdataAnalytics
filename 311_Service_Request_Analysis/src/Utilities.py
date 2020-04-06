@@ -86,13 +86,19 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_tic
         plt.yticks(rotation=y_tick_rotation)
 
     plt.title(title)
-    plt.savefig(results_folder + str(fig_num) + '.png', bbox_inches = "tight")
+    plt.savefig(results_folder + str(fig_num) + '.png', bbox_inches="tight")
 
 
 def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, results_folder, x_ticks=None,
                  x_ticks_labels=None, x_tick_rotation=0,
-                 y_ticks=None, y_ticks_labels=None, y_tick_rotation=0):
-    df_groupby_col = df.groupby(col_x_name).count().orderBy(col_x_name).collect()
+                 y_ticks=None, y_ticks_labels=None, y_tick_rotation=0, is_count=True):
+    if is_count:
+        df_groupby_col = df.groupby(col_x_name).count().orderBy(col_x_name).collect()
+    else:
+        df_groupby_col = df.groupby(col_x_name).mean(col_y_name).withColumnRenamed("avg(" + col_y_name + ")",
+                                                                                   col_y_name).orderBy(
+            col_x_name).collect()
+
     x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_x_name, col_y_name)
     plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_ticks, x_ticks_labels, x_tick_rotation,
                    y_ticks, y_ticks_labels, y_tick_rotation)
