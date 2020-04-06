@@ -1,18 +1,53 @@
 # Python source script for Analysis Part
 from pyspark.sql.types import IntegerType
 
+import Constants
 import Utilities as utilFor311
 
 
+def get_top_boroughs(complaint_type_df):
+    boroughs = complaint_type_df.groupBy('Borough').count().filter('count > 5000').select(
+        'Borough').distinct().collect()
+    top_boroughs = []
+    for item in boroughs:
+        top_boroughs.append(item[0])
+    return top_boroughs
+
+
+def plot_top_boroughs_complaint_wise(complaint_type_df, year):
+    top_boroughs = get_top_boroughs(complaint_type_df)
+    results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q1
+    fig_num = 2
+    for i in range(len(top_boroughs)):
+        nyc_311_df_borough = complaint_type_df.filter(complaint_type_df['Borough'] == top_boroughs[i])
+        utilFor311.prepare_plot(nyc_311_df_borough, 'Complaint_Type', 'count',
+                                "Complaint Wise Distribution - " + top_boroughs[i] + " - " + str(year),
+                                "Complaint Types", "Count", fig_num, results_folder, x_tick_rotation='vertical')
+        fig_num += 1
+
+
+def plot_complaint_wise_distribution(complaint_type_df, creation_year):
+    results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q1
+    utilFor311.prepare_plot(complaint_type_df, 'Complaint_Type', 'count',
+                            "Complaint Wise Distribution - " + str(creation_year), "Complaint Types", "Count", 1,
+                            results_folder, x_tick_rotation='vertical')
+
+
+def get_creation_year(df):
+    return df.select("Created_Date").take(1)[0].__getitem__("Created_Date")[6:10]
+
+
 def complaint_type_analysis(complaint_type_df):
-    utilFor311.prepare_plot(complaint_type_df, 'Complaint_Type', 'count', "Complaint Wise Distribution",
-                            "Complaint Types", "Count", 1, x_tick_rotation='vertical')
+    creation_year = get_creation_year(complaint_type_df)
+    plot_complaint_wise_distribution(complaint_type_df, creation_year)
+    plot_top_boroughs_complaint_wise(complaint_type_df, creation_year)
 
 
 def monthly_hourly_analysis(df_with_month_hour):
     # Insight 2 : Daily, Hourly, Monthly Analysis
     df_with_month_hour.cache()
-    creation_year = df_with_month_hour.select("Created_Date").take(1)[0].__getitem__("Created_Date")[6:10]
+    results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q2
+    creation_year = get_creation_year(df_with_month_hour)
     df_with_month_hour = df_with_month_hour.withColumn("Creation_Hour",
                                                        df_with_month_hour["Creation_Hour"].cast(IntegerType()))
     df_with_month_hour = df_with_month_hour.withColumn("Creation_Month",
@@ -29,43 +64,37 @@ def monthly_hourly_analysis(df_with_month_hour):
     # Hourly
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Hour', 'count',
                             "Cleaning & Household Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 1, range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 1, results_folder, range(0, 24, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Hour', 'count',
                             "Noise Complaints count hourly basis. Year-" + str(creation_year), "Hour",
-                            'Total Count (across the year)', 2, range(0, 24, 1))
+                            'Total Count (across the year)', 2, results_folder, range(0, 24, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Hour', 'count',
                             "Vehicle and Parking Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 3, range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 3, results_folder, range(0, 24, 1))
     # Daily
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Day', 'count',
                             "Cleaning & Household Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 4, range(1, 32, 1))
+                            'Total Count (across the year)', 4, results_folder, range(1, 32, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Day', 'count',
                             "Noise Complaints count daily basis", "Day",
-                            'Total Count (across the year)', 5,
+                            'Total Count (across the year)', 5, results_folder,
                             range(1, 32, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Day', 'count',
                             "Vehicle and Parking Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 6, range(1, 32, 1))
+                            'Total Count (across the year)', 6, results_folder, range(1, 32, 1))
 
     # Monthly
     months = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Month', 'count',
                             "Cleaning & Household Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 7, range(1, 13, 1), months)
+                            "Month", 'Total Count (across the year)', 7, results_folder, range(1, 13, 1), months)
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Month', 'count',
                             "Noise Complaints count monthly basis. Year-" + str(creation_year), "Month",
-                            'Total Count (across the year)', 8, range(1, 13, 1), months)
+                            'Total Count (across the year)', 8, results_folder, range(1, 13, 1), months)
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Month', 'count',
                             "Vehicle and Parking Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 9, range(1, 13, 1), months)
+                            "Month", 'Total Count (across the year)', 9, results_folder, range(1, 13, 1), months)
 
 
 def resolution_time_analysis():
     return None
-
-
-def request_mode_analysis(df_with_mode_of_request):
-    utilFor311.prepare_plot(df_with_mode_of_request, 'Open_Data_Channel_Type', 'count',
-                            "no of request for different Channels",
-                            "Open_Data_Channel_Type", "Count", 8, None, False)
