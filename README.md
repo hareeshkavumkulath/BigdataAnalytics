@@ -110,7 +110,46 @@ For a more meaningful analysis out of the **367** different complaint types we s
 1. Trend Analysis : To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
  
 	* City wide and Boroughs wide distribution of complaints
-		* **To be done**
+		* Complaint Type Distribution in the year 2018 and 2019.
+
+		![Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Overall.png?token=AKL5YZ6CUVLB65ZTRM362IS6SOGK4)
+
+		From the graph it is evident that, in the year 2018 and in 2019 the most number of complaints received for Residential Noise and Heat/Hot Water issue. The least number of complaints obtained in both years are for Water Leak.
+
+		* Borough Wise Comparisons of Complaint Type Distribution.
+
+		Following are the major boroughs which reported at least 5000 complaints.
+
+		a. Queens
+
+		![Queens_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Queens.png?token=AKL5YZZLUKWK7OM6XXUTC4C6SOHRG)
+
+		Most complaints recieved in Queens in the year 2019 is from Illegal Parking and in 2018 it was Request Large Bulky Item Collection, while the least complaints were from Water Leak.
+
+		b. Brooklyn
+
+		![Brooklyn_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Brooklyn.png?token=AKL5YZ6BCFAB6KKR5J3NXWK6SOHU2)
+
+		In Brooklyn in the year 2019 the most complaints received for Heat/Hot Water and Residential Noise, while in the year 2018 the most complaints were from same type and also from Request Large Bulky Item Collection. In both years, the least complaints were for Water Leak.
+
+		c. Bronx
+
+		![Bronx_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Bronx.png?token=AKL5YZ47NLPQ5NQDAUYQNMC6SOHZU)
+
+		In Bronx, Hot water issues were really common in both 2018 and 2019, and in both years there were less number of Noise issues. 
+
+		d. Manhattan
+
+		![Manhattan_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Manhattan.png?token=AKL5YZY5MAUM4FJI4MBI57C6SOH4K)
+
+		In Manhattan the least reported issue was Blocked Driveway in both years. And Hot water issues and Residential Noise issues were the most reported complaint types.
+
+		e. Staten Island
+
+		![Staten_Island_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/StatenIsland.png?token=AKL5YZYBRGAUUBCD4CWDOMC6SOH7K)
+
+		In Staten Island, Illegal Parking was the most reported complaints while it was the issues with the Large Bulky Item Collection in the year 2018. In both years the water leak issues were the least reported complaints.
+
 		
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
