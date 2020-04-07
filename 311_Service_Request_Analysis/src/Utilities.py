@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt
 from pyspark.sql import SparkSession
 
-import Constants
 from data_cleaning import DataCleaner
 
 
@@ -61,31 +60,45 @@ def create_x_y_coordinates_for_group_by_results(group_by_result, col_x_name, col
     return x, y
 
 
-def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks=None, x_ticks_lables=None, y_ticks=None,
-                   y_ticks_lables=None):
+def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_ticks=None, x_ticks_labels=None,
+                   x_tick_rotation=0, y_ticks=None, y_ticks_labels=None, y_tick_rotation=0):
     plt.figure(num=fig_num, figsize=(8, 4))
 
     plt.bar(x, y, align='center', color='blue', alpha=.5)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
+
     if x_ticks is not None:
-        if x_ticks_lables is not None:
-            plt.xticks(x_ticks, x_ticks_lables)
+        if x_ticks_labels is not None:
+            plt.xticks(x_ticks, x_ticks_labels, rotation=x_tick_rotation)
         else:
-            plt.xticks(x_ticks)
+            plt.xticks(x_ticks, rotation=x_tick_rotation)
+    else:
+        plt.xticks(rotation=x_tick_rotation)
+
     if y_ticks is not None:
-        if y_ticks_lables is not None:
-            plt.yticks(y_ticks, y_ticks_lables)
+        if y_ticks_labels is not None:
+            plt.yticks(y_ticks, y_ticks_labels, rotation=y_tick_rotation)
         else:
-            plt.yticks(y_ticks)
+            plt.yticks(y_ticks, rotation=y_tick_rotation)
+    else:
+        plt.yticks(rotation=y_tick_rotation)
 
     plt.title(title)
-    plt.savefig(Constants.RESULTS_FOLDER_ANALYSIS_Q2 + str(fig_num) + '.png')
+    plt.savefig(results_folder + str(fig_num) + '.png', bbox_inches="tight")
 
 
-def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, x_ticks=None, x_ticks_lables=None,
-                 y_ticks=None, y_ticks_lables=None):
-    df_groupby_col = df.groupby(col_x_name).count().orderBy(col_x_name).collect()
+def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, results_folder, x_ticks=None,
+                 x_ticks_labels=None, x_tick_rotation=0,
+                 y_ticks=None, y_ticks_labels=None, y_tick_rotation=0, is_count=True):
+    if is_count:
+        df_groupby_col = df.groupby(col_x_name).count().orderBy(col_x_name).collect()
+    else:
+        df_groupby_col = df.groupby(col_x_name).mean(col_y_name).withColumnRenamed("avg(" + col_y_name + ")",
+                                                                                   col_y_name).orderBy(
+            col_x_name).collect()
+
     x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_x_name, col_y_name)
-    plot_chart_x_y(x, y, title, x_label, y_label, fig_num, x_ticks, x_ticks_lables, y_ticks, y_ticks_lables)
+    plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_ticks, x_ticks_labels, x_tick_rotation,
+                   y_ticks, y_ticks_labels, y_tick_rotation)

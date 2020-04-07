@@ -3,7 +3,7 @@
 ## Abstract
 Recent advances in the field of Big Data Analytics and Machine Learning have introduced a plethora of open-source tools and technologies for both, 
 academia and the growing data analyst community. In this project we try leveraging one such popular distributed data processing framework Apache Spark
-to analyse 311 - Service Request Data for the city of New-York. Being updated almost on a daily basis for the last 10 years, massive size of this dataset makes it a suitable candidate for analysis using a distributed data processing framework like Spark. Making use of Spark Ecosystem libraries like Spark SQL and Spark ML, on this dataset, enables us to derive some interesting insights, which might drive better resource planning within the city. Identifying the 3 primary goals for this project we first try answering a few statistical questions like “*most frequent complaints reported(across entire city/borough wise)*”, “*Average time to resolve the request (category/department wise)*”, “*mostly used source for making request(borough wise)*” and “*most busy days/months in terms of request volumes*”.
+to analyse 311 - Service Request Data for the city of New-York. Being updated almost on a daily basis for the last 10 years, massive size of this dataset makes it a suitable candidate for analysis using a distributed data processing framework like Spark. Making use of Spark Ecosystem libraries like Spark SQL and Spark ML, on this dataset, enables us to derive some interesting insights, which might drive better resource planning within the city. Identifying the 3 primary goals for this project we first try answering a few statistical questions like “*most frequent complaints reported(across entire city/borough wise)*”, “*Average time to resolve the request (category/department wise)*” and “*most busy days/months in terms of request volumes*”.
 Arriving at these statistical figures involve making extensive use of Spark SQLs Dataframe API. Secondly we generate a model for predicting the closure time for any new incoming service request, after comparing performance of a set of selected supervised learning algorithms available in Spark ML. As part of our last goal we would be applying K-Means clustering over a selected set of features dividing the dataset into clusters to further analyse them for identifying any underlying service request patterns.
 
 
@@ -110,29 +110,41 @@ For a more meaningful analysis out of the **367** different complaint types we s
 1. Trend Analysis : To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
  
 	* City wide and Boroughs wide distribution of complaints
-		* **To be done**
+		* Complaint Type Distribution in the year 2018 and 2019.
+
+		![Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Overall.png?token=AKL5YZ6CUVLB65ZTRM362IS6SOGK4)
+
+		From the graph it is evident that, in the year 2018 and in 2019 the most number of complaints received for Heat/Hot Water issues and Residential Noise. There were more than 200,000 complaints related to Heat/Hot water, while In 2019 the residential noise complaints were higher than 2018. In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019. Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
+
+		Following are the major boroughs which reported at least 5000 complaints.
+
+		![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
+
+		Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. While in Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
 		
 	* Monthly, Daily and Hourly distribution of complaints
 		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
 		
-		![NoiseHourly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018.JPG?token=AKZR5NQ6JECKRMAKFVTK5IK6SHUDU) 
-		
-		![NoiseHourly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2019.JPG?token=AKZR5NXPH4YMQDCQDTSIG6S6SHUHS)
-		
+		![NoiseHourly2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018_2019.JPG?token=AKZR5NWIYWVQII4RZDLXBNC6SMOTQ) 
+				
 		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
 		
-		![ParkingDaily2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018.JPG?token=AKZR5NU6SROGRFILHH4SWJ26SHUXO)
-
-		![ParkingDaily2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2019.JPG?token=AKZR5NRAIWBGWLXHB432LJS6SHU3M)
+		![ParkingDaily2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018_2019.JPG?token=AKZR5NRQA6RV4BLIZXW2KU26SMOWU)
 	
 		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
 		
-		![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018.JPG?token=AKZR5NX4FP4XHCFKTWJD6TK6SHU5Q)
+		![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018_2019.JPG?token=AKZR5NRZOYYNNAPITD2C5L26SMOYG)
 
-		![NoiseMonthly2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2019.JPG?token=AKZR5NSCWF7YB3KDDFNIEHS6SHVBK)	
 
 	* Average time to resolve the request (Department Wise)
-		* **To be done**
+		
+		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
+
+		In both years 2018 and 2019 it takes more than 400hrs to fix the Unsanitary Condition issues. Other issues like water leak, Plumbing, Paint/Plaster, Request Large Bulky Item Collection took same amount of time in both years. Where the time taken for fixing the Water System issues is considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs. For all other issues the time to resolve the issues is same in both years. Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
+
+		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
+
+		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Agency.png?token=AKL5YZ3ZWI6CZRS73EBXWVS6SU3QS)
 	
 **Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
@@ -140,16 +152,14 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
 	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
 	
-	![CostKMeans](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/CostKMeans.jpg?token=AKZR5NRRY3R3J4AXYZRRUPC6RVKIS)
-	
-	![ElbowCurve](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ElbowCurve.png?token=AKZR5NRXTXZCW2NOE6LBRTS6RVJS6)
-	
+	![CostKMeans_Elbow](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringCostAndElbow.JPG?token=AKZR5NXUIG5HGSOJEDAGYR26SMPOO)
+		
 	Based on the elbow curve shown above we arrived at **8** being the optimal number of clusters for the given dataset and Re-Ran our clustering with a predefined value of **K set to 8**.
 	
 	Resulting zipcode clusters obtained are shown in the file:
 	[CluteringResults2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringResults.txt?token=AKZR5NWTSL4VDYTSI6LGY7S6RVJXC)
 	
-	As a sanity check for our results we tried analysing one of the a clusters to see if there is any recognizable complaint trend among the zipcodes in that cluster.
+	As a sanity check for our results we tried analysing one of the clusters (Cluster 2 in results file) to see if there is any recognizable complaint trend among the zipcodes in that cluster.
 	
 	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Analysis_Cluster_2.JPG?token=AKZR5NXAJL2KD6GTVEM3U5C6SFB4U)
 	
@@ -160,7 +170,13 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
 3. Supervised Learning
-	* **To be done**
+	* Add any additional cleaning steps you have taken apart from above mentioned steps.
+	* What features you selected.
+	* Importance level of each feature that contributes to the final model.
+	* Train-Test Split Ratio.
+	* Hyperparameters selected for each model while using 3-Fold Cross-Validation.
+	* RMSE scores on Training and Test Data for each Model
+	* Best Regressor Model selected based on RMSE.
 	
 #### Limitations and Future Work
 	
