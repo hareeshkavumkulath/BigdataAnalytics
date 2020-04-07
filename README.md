@@ -170,13 +170,6 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
 3. Supervised Learning
-	* Add any additional cleaning steps you have taken apart from above mentioned steps.
-	* What features you selected.
-	* Importance level of each feature that contributes to the final model.
-	* Train-Test Split Ratio.
-	* Hyperparameters selected for each model while using 3-Fold Cross-Validation.
-	* RMSE scores on Training and Test Data for each Model
-	* Best Regressor Model sel	ected based on RMSE.
 	The prepared data created above have categorical columsn whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
 	
 	End features list:
