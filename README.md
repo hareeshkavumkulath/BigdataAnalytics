@@ -138,13 +138,13 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	* Average time to resolve the request (Department Wise)
 		
-		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Overall.png?token=AKL5YZ7FIOOS5DGVN4TJXGS6SQDUU)
+		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
 
 		In both years 2018 and 2019 it takes more than 400hrs to fix the Unsanitary Condition issues. Other issues like water leak, Plumbing, Paint/Plaster, Request Large Bulky Item Collection took same amount of time in both years. Where the time taken for fixing the Water System issues is considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs. For all other issues the time to resolve the issues is same in both years. Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
 
 		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
 
-		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Agency.png?token=AKL5YZ7LZJ6ZWMI2MIAXFFK6SQEII)
+		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Agency.png?token=AKL5YZ3ZWI6CZRS73EBXWVS6SU3QS)
 	
 **Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
