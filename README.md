@@ -245,7 +245,7 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* RMSE(Root Mean Squared) - The model with less RMSE will be better
 	* R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
 	* Formulae:	
-	{url}
+	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
 	
 	
 #### Limitations and Future Work
