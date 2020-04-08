@@ -176,51 +176,33 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* Creation_Month
 	* Creation_Day
 	* Creation_Hour
-	* e_AGENCY_HPD
-	* e_AGENCY_NYPD
-	* e_AGENCY_DEP
-	* e_AGENCY_DSNY
-	* e_AGENCY_DOITT
-	* e_BOROUGH_UNSPECIFIED
-	* e_BOROUGH_QUEENS
-	* e_BOROUGH_BROOKLYN
-	* e_BOROUGH_BRONX
-	* e_BOROUGH_MANHATTAN
-	* e_BOROUGH_STATEN ISLAND
-	* e_COMPLAIN_TYPE_UNSANITARY CONDITION
-	* e_COMPLAIN_TYPE_Illegal Parking
-	* e_COMPLAIN_TYPE_Noise - Residential
-	* e_COMPLAIN_TYPE_Noise - Commercial 
-	* e_COMPLAIN_TYPE_Water System 
-	* e_COMPLAIN_TYPE_Blocked Driveway
-	* e_COMPLAIN_TYPE_HEAT/HOT WATER
-	* e_COMPLAIN_TYPE_PAINT/PLASTER
-	* e_COMPLAIN_TYPE_Noise
-	* e_COMPLAIN_TYPE_Request Large Bulky Item Collection
-	* e_COMPLAIN_TYPE_PLUMBING
-	* e_COMPLAIN_TYPE_WATER LEAK
-	* e_COMPLAIN_TYPE_Noise
-	* e_CHANNEL_TYPE_MOBILE
-	* e_CHANNEL_TYPE_UNKNOWN
-	* e_CHANNEL_TYPE_OTHER
-	* e_CHANNEL_TYPE_PHONE
-	* e_CHANNEL_TYPE_ONLINE
+	* e_AGENCY_{AgencyType} where AgencyType are different Agency Type
+	* e_BOROUGH_{BoroughType} where BoroughType are different Borough Type
+	* e_COMPLAIN_TYPE_{ComplainType} where ComplainType are different Complain Type
+	* e_CHANNEL_TYPE_{ChannelType} where ChannelType are different Channel Type
 	
 	Train-Test Split ratio is 0.8,0.2 where 0.8 is training sample and 0.2 is test sample.
 	
 	Hyper parameters is tested to find the best hyperparameters based on 3 fold cross validation. 
-	Hyperparameters used:
-	* Linear Regression regParam= [0.1, 0.01], fitIntercept= [False, True], maxIter, [100, 150, 200]
+	Hyperparameters explored:
+	* Linear Regression regParam= [0.1, 0.01], fitIntercept= [False, True], maxIter= [100, 150, 200]
 	where regParam is regularisation parameter with value greater than zero, fitIntercept is the intercept of line, maxIter correspond to epochs
 	* Random Forest numTrees= [35, 50], maxDepth= [7, 10]
 	where numTrees are number of trees to be formed in Random Forest, maxDepth is the maximum depth of one tree
-	* Gradient Boost maxIter= [50, 100], maxDepth= [5]
+	* Gradient Boost maxIter= [20, 50, 100], maxDepth= [5, 10, 20]
 	where maxIter correspond to epochs, maxDepth is the maximum depth of one tree
 	
+	Best Hyperparameters after 3 fold cross validation.
+	* Linear Regression regParam= 0.1, maxIter, 100
+	* Random Forest numTrees= 120, maxDepth= 7
+	* Gradient Boost maxIter= 20, maxDepth= 20
+	
 	RMSE AND R2 value for each model:
-	* Linear Regression RMSE=198.45 , R2=0.3017 	
-	* Random Forest RMSE=188.61 , R2=0.3643 
-	* Gradient Boost RMSE= , R2= 
+	* Linear Regression RMSE=195.99 , R2=0.3091 	
+	* Random Forest RMSE=193.34 , R2=0.3276 
+	* Gradient Boost RMSE=188.60 , R2=0.3602 
+	
+	**For detail results refer 311_Service_Request_Analysis/results/Analysis/Supervised Learning/2019_Reference**
 	
 	Best Regressior model based on RMSE and R2 will be **Gradient Boost**
 	
