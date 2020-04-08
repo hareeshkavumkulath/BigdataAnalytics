@@ -59,41 +59,44 @@ def monthly_hourly_analysis(df_with_month_hour):
         df_with_month_hour.Issue_Category == 'HOUSE_HOLD_CLEANING_ISSUES')
     df_noise_issues = df_with_month_hour.filter(df_with_month_hour.Issue_Category == 'NOISE_ISSUES')
     df_vehicles_and_parking_issues = df_with_month_hour.filter(
-        df_with_month_hour.Issue_Category == 'VEHICLES_AND_PARKING_ISSUE')
+        df_with_month_hour.Issue_Category == 'VEHICLES_AND_PARKING_ISSUES')
 
     # Hourly
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Hour', 'count',
                             "Cleaning & Household Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 1, results_folder, range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 1, results_folder, x_ticks=range(0, 24, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Hour', 'count',
                             "Noise Complaints count hourly basis. Year-" + str(creation_year), "Hour",
-                            'Total Count (across the year)', 2, results_folder, range(0, 24, 1))
+                            'Total Count (across the year)', 2, results_folder, x_ticks=range(0, 24, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Hour', 'count',
                             "Vehicle and Parking Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 3, results_folder, range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 3, results_folder, x_ticks=range(0, 24, 1))
     # Daily
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Day', 'count',
                             "Cleaning & Household Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 4, results_folder, range(1, 32, 1))
+                            'Total Count (across the year)', 4, results_folder, x_ticks=range(1, 32, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Day', 'count',
                             "Noise Complaints count daily basis", "Day",
                             'Total Count (across the year)', 5, results_folder,
-                            range(1, 32, 1))
+                            x_ticks=range(1, 32, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Day', 'count',
                             "Vehicle and Parking Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 6, results_folder, range(1, 32, 1))
+                            'Total Count (across the year)', 6, results_folder, x_ticks=range(1, 32, 1))
 
     # Monthly
     months = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Month', 'count',
                             "Cleaning & Household Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 7, results_folder, range(1, 13, 1), months)
+                            "Month", 'Total Count (across the year)', 7, results_folder, x_ticks=range(1, 13, 1),
+                            x_ticks_labels=months)
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Month', 'count',
                             "Noise Complaints count monthly basis. Year-" + str(creation_year), "Month",
-                            'Total Count (across the year)', 8, results_folder, range(1, 13, 1), months)
+                            'Total Count (across the year)', 8, results_folder, x_ticks=range(1, 13, 1),
+                            x_ticks_labels=months)
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Month', 'count',
                             "Vehicle and Parking Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 9, results_folder, range(1, 13, 1), months)
+                            "Month", 'Total Count (across the year)', 9, results_folder, x_ticks=range(1, 13, 1),
+                            x_ticks_labels=months)
 
 
 def get_top_agencies(df):

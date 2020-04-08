@@ -139,6 +139,7 @@ def filter_frequent_request_types(df_311):
     df_noise_issues = df_311.filter(df_311.Complaint_Type.isin(Constants.NOISE_ISSUES)).withColumn('Issue_Category',
                                                                                                    lit('NOISE_ISSUES'))
     df_vehicles_and_parking_issues = df_311.filter(
-        df_311.Complaint_Type.isin(Constants.VEHICLES_AND_PARKING_ISSUE)).withColumn('Issue_Category',
-                                                                                     lit('VEHICLES_AND_PARKING_ISSUE'))
+        df_311.Complaint_Type.isin(Constants.VEHICLES_AND_PARKING_ISSUES)).withColumn('Issue_Category',
+                                                                                      lit(
+                                                                                          'VEHICLES_AND_PARKING_ISSUES'))
     return df_house_hold_cleaning_issues.union(df_noise_issues).union(df_vehicles_and_parking_issues)

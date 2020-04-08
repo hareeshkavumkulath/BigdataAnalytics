@@ -1,5 +1,4 @@
 # Python source script for Training, Evaluating and Saving the Model to disk.
-import datetime
 import os
 
 from pyspark.ml.evaluation import RegressionEvaluator
@@ -19,7 +18,6 @@ def directly_read_prepared_data(path):
 
 
 def prepare_data_for_supervised_learning(nyc_311_df_supervised):
-    print(datetime.datetime.now())
     nyc_311_df_supervised = nyc_311_df_supervised.drop('created_date')
     nyc_311_df_supervised.cache()
 
@@ -42,11 +40,21 @@ def prepare_data_for_supervised_learning(nyc_311_df_supervised):
     final_nyc_311_df_supervised = nyc_311_df_supervised.select("Creation_Month", "Creation_Day", "Creation_Hour",
                                                                'time_to_resolve_in_hrs',
                                                                *agencies_expr + boroughs_expr + complain_types_expr + open_data_channel_types_expr)
-
+    final_nyc_311_df_supervised = final_nyc_311_df_supervised.withColumn("Creation_Month",
+                                                                         final_nyc_311_df_supervised.Creation_Month.cast(
+                                                                             'int'))
+    final_nyc_311_df_supervised = final_nyc_311_df_supervised.withColumn("Creation_Day",
+                                                                         final_nyc_311_df_supervised.Creation_Day.cast(
+                                                                             'int'))
+    final_nyc_311_df_supervised = final_nyc_311_df_supervised.withColumn("Creation_Hour",
+                                                                         final_nyc_311_df_supervised.Creation_Hour.cast(
+                                                                             'int'))
+    final_nyc_311_df_supervised = final_nyc_311_df_supervised.withColumn("time_to_resolve_in_hrs",
+                                                                         final_nyc_311_df_supervised.time_to_resolve_in_hrs.cast(
+                                                                             'double'))
     # Save new csv for prepared data to be used in model Learning
-    final_nyc_311_df_supervised.coalesce(1).write.format('com.databricks.spark.csv').save(
-        './311dataset/final_nyc_311_df_supervised.csv', header='true')
-    print(datetime.datetime.now())
+    # final_nyc_311_df_supervised.coalesce(1).write.format('com.databricks.spark.csv').save(
+    #    './311dataset/final_nyc_311_df_supervised.csv', header='true')
     return final_nyc_311_df_supervised
 
 
