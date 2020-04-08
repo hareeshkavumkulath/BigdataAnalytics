@@ -161,7 +161,7 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	
 	As a sanity check for our results we tried analysing one of the clusters (Cluster 2 in results file) to see if there is any recognizable complaint trend among the zipcodes in that cluster.
 	
-	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Analysis_Cluster_2.JPG?token=AKZR5NXAJL2KD6GTVEM3U5C6SFB4U)
+	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Analysis_Cluster_2.png?token=AKZR5NXVWL3JTTPE4MZGXV26SZ256)
 	
 	As per our expectations every zipcode within this cluster had the **same top 5 complaints(namely Heat/Hot Water, Illegal Parking, Blocked Driveway, Noise - Residential and Request Large Bulky Item Collection)**.
 	
