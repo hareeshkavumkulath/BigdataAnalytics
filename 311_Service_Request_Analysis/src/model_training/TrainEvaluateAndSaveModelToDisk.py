@@ -123,7 +123,7 @@ def evaluate_and_save_model(model, model_name, predictions):
     op_string = op_string + "20 Sample Records for Predictions" + os.linesep
     op_string = op_string + str(predictions.select("features", "label", "prediction").take(20)) + os.linesep
 
-    filename = Constants.RESULTS_FOLDER_ANALYSIS_SUPERVISED_LEARNING + "ModelResults.txt"
+    filename = Constants.RESULTS_FOLDER_ANALYSIS_SUPERVISED_LEARNING + model_name + "Results.txt"
 
     if os.path.exists(filename):
         append_write = 'a'
