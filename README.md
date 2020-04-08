@@ -242,9 +242,10 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* e_COMPLAIN_TYPE_Noise - Commercial - 0.085
 	
 	**Evaluation Metric -**
-	RMSE(Root Mean Squared) - The model with less RMSE will be better
-	R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
-		
+	* RMSE(Root Mean Squared) - The model with less RMSE will be better
+	* R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
+	* Formulae:	
+	{url}
 	
 	
 #### Limitations and Future Work
