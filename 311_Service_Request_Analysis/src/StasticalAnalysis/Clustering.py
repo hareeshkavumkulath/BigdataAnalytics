@@ -24,7 +24,7 @@ def get_actual_zip_complaint_map(cleaned_df, sc):
 def get_full_zip_complaint_map(cleaned_df, sc):
     unq_zipcodes_rdd = sc.parallelize(cleaned_df.select('Incident_Zip').distinct().collect())
     unq_complaint_types_rdd = sc.parallelize(sorted(Constants.HOUSE_HOLD_CLEANING_ISSUES +
-                                                    Constants.VEHICLES_AND_PARKING_ISSUE
+                                                    Constants.VEHICLES_AND_PARKING_ISSUES
                                                     + Constants.NOISE_ISSUES))
     unq_complaint_types_rdd = unq_complaint_types_rdd.map(lambda complaint: {complaint: 0})
     zipcode_complaint_full_pair_rdd = unq_zipcodes_rdd.cartesian(unq_complaint_types_rdd)
