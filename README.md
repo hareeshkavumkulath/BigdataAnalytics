@@ -138,13 +138,13 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	* Average time to resolve the request (Department Wise)
 		
-		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Overall.png?token=AKL5YZ7FIOOS5DGVN4TJXGS6SQDUU)
+		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
 
 		In both years 2018 and 2019 it takes more than 400hrs to fix the Unsanitary Condition issues. Other issues like water leak, Plumbing, Paint/Plaster, Request Large Bulky Item Collection took same amount of time in both years. Where the time taken for fixing the Water System issues is considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs. For all other issues the time to resolve the issues is same in both years. Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
 
 		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
 
-		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q4/Agency.png?token=AKL5YZ7LZJ6ZWMI2MIAXFFK6SQEII)
+		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Agency.png?token=AKL5YZ3ZWI6CZRS73EBXWVS6SU3QS)
 	
 **Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
 	
@@ -170,13 +170,60 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
 3. Supervised Learning
-	* Add any additional cleaning steps you have taken apart from above mentioned steps.
-	* What features you selected.
-	* Importance level of each feature that contributes to the final model.
-	* Train-Test Split Ratio.
-	* Hyperparameters selected for each model while using 3-Fold Cross-Validation.
-	* RMSE scores on Training and Test Data for each Model
-	* Best Regressor Model selected based on RMSE.
+	The prepared data created above have categorical columsn whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
+	
+	End features list:
+	* Creation_Month
+	* Creation_Day
+	* Creation_Hour
+	* e_AGENCY_HPD
+	* e_AGENCY_NYPD
+	* e_AGENCY_DEP
+	* e_AGENCY_DSNY
+	* e_AGENCY_DOITT
+	* e_BOROUGH_UNSPECIFIED
+	* e_BOROUGH_QUEENS
+	* e_BOROUGH_BROOKLYN
+	* e_BOROUGH_BRONX
+	* e_BOROUGH_MANHATTAN
+	* e_BOROUGH_STATEN ISLAND
+	* e_COMPLAIN_TYPE_UNSANITARY CONDITION
+	* e_COMPLAIN_TYPE_Illegal Parking
+	* e_COMPLAIN_TYPE_Noise - Residential
+	* e_COMPLAIN_TYPE_Noise - Commercial 
+	* e_COMPLAIN_TYPE_Water System 
+	* e_COMPLAIN_TYPE_Blocked Driveway
+	* e_COMPLAIN_TYPE_HEAT/HOT WATER
+	* e_COMPLAIN_TYPE_PAINT/PLASTER
+	* e_COMPLAIN_TYPE_Noise
+	* e_COMPLAIN_TYPE_Request Large Bulky Item Collection
+	* e_COMPLAIN_TYPE_PLUMBING
+	* e_COMPLAIN_TYPE_WATER LEAK
+	* e_COMPLAIN_TYPE_Noise
+	* e_CHANNEL_TYPE_MOBILE
+	* e_CHANNEL_TYPE_UNKNOWN
+	* e_CHANNEL_TYPE_OTHER
+	* e_CHANNEL_TYPE_PHONE
+	* e_CHANNEL_TYPE_ONLINE
+	
+	Train-Test Split ratio is 0.8,0.2 where 0.8 is training sample and 0.2 is test sample.
+	
+	Hyper parameters is tested to find the best hyperparameters based on 3 fold cross validation. 
+	Hyperparameters used:
+	* Linear Regression regParam= [0.1, 0.01], fitIntercept= [False, True], maxIter, [100, 150, 200]
+	where regParam is regularisation parameter with value greater than zero, fitIntercept is the intercept of line, maxIter correspond to epochs
+	* Random Forest numTrees= [35, 50], maxDepth= [7, 10]
+	where numTrees are number of trees to be formed in Random Forest, maxDepth is the maximum depth of one tree
+	* Gradient Boost maxIter= [50, 100], maxDepth= [5]
+	where maxIter correspond to epochs, maxDepth is the maximum depth of one tree
+	
+	RMSE AND R2 value for each model:
+	* Linear Regression RMSE=198.45 , R2=0.3017 	
+	* Random Forest RMSE=188.61 , R2=0.3643 
+	* Gradient Boost RMSE= , R2= 
+	
+	Best Regressior model based on RMSE and R2 will be **Gradient Boost**
+	
 	
 #### Limitations and Future Work
 	
