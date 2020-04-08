@@ -24,6 +24,6 @@ MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 HOUSE_HOLD_CLEANING_ISSUES = ['HEAT/HOT WATER', 'Request Large Bulky Item Collection', 'UNSANITARY CONDITION',
                               'Water System', 'PLUMBING', 'PAINT/PLASTER', 'WATER LEAK']
 
-VEHICLES_AND_PARKING_ISSUE = ['Illegal Parking', 'Blocked Driveway']
+VEHICLES_AND_PARKING_ISSUES = ['Illegal Parking', 'Blocked Driveway']
 
 NOISE_ISSUES = ['Noise - Residential', 'Noise', 'Noise - Commercial', 'Noise - Street/Sidewalk']

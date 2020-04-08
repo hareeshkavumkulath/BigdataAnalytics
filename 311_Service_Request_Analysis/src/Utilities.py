@@ -24,7 +24,7 @@ def read_data_from_csv(filename):
 def rearrange_cols(df_311):
     return df_311.select('Unique_Key', 'Closing_timestamp', 'Creation_timestamp',
                          'time_to_resolve_in_hrs',
-                         'Agency', 'Agency Name', 'Open_Data_Channel_Type', 'Status',
+                         'Agency', 'Agency_Name', 'Open_Data_Channel_Type', 'Status',
                          'Complaint_Type', 'Borough', 'Creation_Month',
                          'Creation_Day', 'Creation_Hour',
                          'Closing_Month', 'Closing_Day', 'Closing_Hour',

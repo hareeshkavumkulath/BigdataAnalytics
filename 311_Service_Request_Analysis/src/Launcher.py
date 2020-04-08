@@ -1,5 +1,5 @@
 # Main Launcher script
-
+import datetime
 import sys
 
 import Constants
@@ -37,7 +37,7 @@ def run_analysis(cleaned_df):
     Analysis.monthly_hourly_analysis(cleaned_df)
     Analysis.resolution_time_analysis(cleaned_df)
 
-    # Clustering
+    # # Clustering
     df_kmeans = Clustering.prepare_data_for_clustering(cleaned_df)
     final_df_kmeans = Clustering.prepare_feature_vector(df_kmeans)
     model_costs = Clustering.run_k_means(final_df_kmeans)
@@ -45,11 +45,11 @@ def run_analysis(cleaned_df):
     model = Clustering.run_kmeans_with_optimal_number_of_cluster(final_df_kmeans)
     zip_code_clusters = Clustering.get_zip_code_assignment_to_clusters(model, final_df_kmeans)
     Clustering.save_clustering_results(zip_code_clusters)
-
-    # Supervised Learning
+    #
+    # # Supervised Learning
     final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.prepare_data_for_supervised_learning(cleaned_df)
-    # final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.directly_read_prepared_data(
-    #    './311dataset/final_nyc_311_df_supervised.csv')
+    # # final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.directly_read_prepared_data(
+    # #    './311dataset/final_nyc_311_df_supervised.csv')
     feature_vector_with_labels = TrainEvaluateAndSaveModelToDisk.prepare_feature_vector(final_nyc_311_df_supervised)
     TrainEvaluateAndSaveModelToDisk.train_linear_regressor(feature_vector_with_labels)
     TrainEvaluateAndSaveModelToDisk.train_gradient_boost_regressor(feature_vector_with_labels)
@@ -60,8 +60,11 @@ if __name__ == "__main__":
     directly_read_cleaned_csv = False
     filename = ""
     if len(sys.argv) == 3:
-        directly_read_cleaned_csv = sys.argv[2]
+        if sys.argv[2] == 'True':
+            directly_read_cleaned_csv = True
         filename = sys.argv[1]
 
+    print(datetime.datetime.now())
     cleaned_311_df = get_cleaned_data(directly_read_cleaned_csv, filename)
     run_analysis(cleaned_311_df)
+    print(datetime.datetime.now())
