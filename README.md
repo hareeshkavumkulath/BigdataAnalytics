@@ -169,8 +169,8 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
-3. Supervised Learning
-	The prepared data created above have categorical columsn whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
+3. Supervised Learning - 
+	The prepared data created above have categorical column whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
 	
 	**End features list:**
 	* Creation_Month
@@ -235,12 +235,17 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	
 	Best Regressior model based on RMSE and R2 will be **Gradient Boost**
 	**Feature Importance -**
-	* Creation_Month - 0.188
 	* Creation_Day - 0.098
+	* Creation_Month - 0.188
 	* Creation_Hour - 0.152
 	* e_AGENCY_DOITT - 0.076
 	* e_COMPLAIN_TYPE_Noise - Commercial - 0.085
-		
+	
+	**Evaluation Metric -**
+	* RMSE(Root Mean Squared) - The model with less RMSE will be better
+	* R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
+	* Formulae:	
+	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
 	
 	
 #### Limitations and Future Work
