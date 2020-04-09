@@ -46,9 +46,9 @@ Original dataset has 41 fields in total. Cleaning activities involved are as fol
 	* Calculating the "time taken to resolve the issue in hours" after standardizing creation and closing date.
 	* Extracting separate columns for Day, Month, Hour of request creation and closing.
 
-Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1014031*** rows
+Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1128786*** rows
 
-Original ***2018*** Dataset has - ***2741682*** rows -> After Cleaning it had ***1097711*** rows
+Original ***2018*** Dataset has - ***2741682*** rows -> After Cleaning it had ***1255981*** rows
 
 List of ***25 columns*** after cleaning:
 
@@ -266,17 +266,18 @@ Results shown for 2019 Data:
 	
 #### Limitations and Future Work
 	
-	The analysis done as part of this project was limited in some aspects like:
-	
-	a. Analysis was only carried out only over the dataset from the year 2019 and 2018.  
-	b. Supervised Learning involved trying hyper-parameter tuning for very few hyper-parameters values.
+The analysis done as part of this project was limited in some aspects like:
 
-	Both the above mentioned points were largely attributed to the fact that the computational resources used for this project were regular personal laptop machines. 
-	In order to overcome such limitations a future extension to this project could involve running this same working pipeline over a compute cluster which would allow us to cover more data and may be arrive at better results within our analysis.  
+a. Analysis was only carried out only over the dataset from the year 2019 and 2018.  
+b. Supervised Learning involved trying hyper-parameter tuning for very few hyper-parameters values.
+
+Both the above mentioned points were largely attributed to the fact that the computational resources used for this project were regular personal laptop machines.  Consequently **were not able to exactly match the results shown in [6]** which we had used as our baseline for the supervised learning part.
+ 
+In order to overcome such limitations a future extension to this project could involve running this same working pipeline over a compute cluster which would allow us to cover more data and may be arrive at better results within our analysis.  
 
 #### Configuration Used
-	
-	It took us approximately **78 mins** to generate all the results on a single machine with **i5 5th Gen** and **8GB RAM**.
+
+It took us approximately **78 mins** to generate all the results on a single machine with **i5 5th Gen** and **8GB RAM**.
 	
 #### Instructions to run the project
 	* Download the Project Directory to your loacl machine - "311_Service_Request_Analysis"
@@ -311,3 +312,5 @@ Analysing nyc 311 requests. http://people.ischool.berkeley.edu/˜samuel.goodgame
 [4] 311 NYC Portal https://www.ny.gov/agencies/nyc-311
 
 [5] New York City 311 Open Data https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9/data
+
+[6] Nickelous Teixeira https://nickeloustex.github.io/NYC-311-Regression-Predicting/

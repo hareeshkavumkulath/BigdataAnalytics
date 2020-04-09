@@ -109,10 +109,15 @@ def get_top_agencies(df):
 def complaint_type_to_time_resolve(df_with_time_to_resolve, creation_year):
     results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q3
     top_agencies = get_top_agencies(df_with_time_to_resolve)
+    fig_num = 1
     all_agency_time_to_resolve = df_with_time_to_resolve.select('Complaint_Type', 'Agency',
                                                                 df_with_time_to_resolve.time_to_resolve_in_hrs.cast(
                                                                     'float').alias('time_to_resolve_in_hrs'))
-    fig_num = 1
+    utilFor311.prepare_plot(all_agency_time_to_resolve, 'Complaint_Type', "time_to_resolve_in_hrs",
+                            "Complaint type average completion time in hours - " + str(creation_year),
+                            "Complaint_Type", "time_to_resolve_in_hrs", fig_num, results_folder, 'Q3',
+                            x_tick_rotation='vertical', is_count=False)
+    fig_num += 1
     for i in range(len(top_agencies)):
         utilFor311.prepare_plot(
             all_agency_time_to_resolve.filter(all_agency_time_to_resolve["Agency"] == top_agencies[i]),

@@ -62,7 +62,7 @@ def create_x_y_coordinates_for_group_by_results(group_by_result, col_x_name, col
 
 def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, ques, x_ticks=None, x_ticks_labels=None,
                    x_tick_rotation=0, y_ticks=None, y_ticks_labels=None, y_tick_rotation=0):
-    plt.figure(figsize=(8, 4))#num=fig_num, figsize=(8, 4))
+    fig = plt.figure(figsize=(8, 4))
 
     plt.bar(x, y, align='center', color='blue', alpha=.5)
 
@@ -87,6 +87,7 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, ques,
 
     plt.title(title)
     plt.savefig(results_folder + str(fig_num)+'_'+ques + '.png', bbox_inches="tight")
+    plt.close(fig)
 
 
 def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, results_folder, ques, x_ticks=None,
