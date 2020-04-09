@@ -19,7 +19,6 @@ def directly_read_prepared_data(path):
 
 def prepare_data_for_supervised_learning(nyc_311_df_supervised):
     nyc_311_df_supervised = nyc_311_df_supervised.drop('created_date')
-    nyc_311_df_supervised.cache()
 
     # Code to make categorical data into columns (Agenct, Borough, Complaint Type, Channel)
     agencies = nyc_311_df_supervised.select("Agency").distinct().rdd.flatMap(lambda x: x).collect()

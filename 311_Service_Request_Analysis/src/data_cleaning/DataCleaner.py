@@ -17,7 +17,6 @@ def drop_unwanted_cols(df_311, drop_cols):
 
 
 def drop_below_threshold(df_311):
-    df_311.cache()
     df_size = df_311.count()
     missing_value_count_df = get_missing_value_count(df_311)
     missing_counts_dict = utilFor311.get_df_row_as_dict(missing_value_count_df.collect()[0])
