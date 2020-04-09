@@ -60,9 +60,9 @@ def create_x_y_coordinates_for_group_by_results(group_by_result, col_x_name, col
     return x, y
 
 
-def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_ticks=None, x_ticks_labels=None,
+def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, ques, x_ticks=None, x_ticks_labels=None,
                    x_tick_rotation=0, y_ticks=None, y_ticks_labels=None, y_tick_rotation=0):
-    plt.figure(num=fig_num, figsize=(8, 4))
+    plt.figure(figsize=(8, 4))#num=fig_num, figsize=(8, 4))
 
     plt.bar(x, y, align='center', color='blue', alpha=.5)
 
@@ -86,10 +86,10 @@ def plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_tic
         plt.yticks(rotation=y_tick_rotation)
 
     plt.title(title)
-    plt.savefig(results_folder + str(fig_num) + '.png', bbox_inches="tight")
+    plt.savefig(results_folder + str(fig_num)+'_'+ques + '.png', bbox_inches="tight")
 
 
-def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, results_folder, x_ticks=None,
+def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, results_folder, ques, x_ticks=None,
                  x_ticks_labels=None, x_tick_rotation=0,
                  y_ticks=None, y_ticks_labels=None, y_tick_rotation=0, is_count=True):
     if is_count:
@@ -100,5 +100,6 @@ def prepare_plot(df, col_x_name, col_y_name, title, x_label, y_label, fig_num, r
             col_x_name).collect()
 
     x, y = create_x_y_coordinates_for_group_by_results(df_groupby_col, col_x_name, col_y_name)
-    plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, x_ticks, x_ticks_labels, x_tick_rotation,
+    plot_chart_x_y(x, y, title, x_label, y_label, fig_num, results_folder, ques, x_ticks, x_ticks_labels, \
+                                                                                x_tick_rotation,
                    y_ticks, y_ticks_labels, y_tick_rotation)

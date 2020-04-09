@@ -36,7 +36,7 @@ def run_analysis(cleaned_df):
     Analysis.complaint_type_analysis(cleaned_df)
     Analysis.monthly_hourly_analysis(cleaned_df)
     Analysis.resolution_time_analysis(cleaned_df)
-
+    #
     # # Clustering
     df_kmeans = Clustering.prepare_data_for_clustering(cleaned_df)
     final_df_kmeans = Clustering.prepare_feature_vector(df_kmeans)
@@ -47,9 +47,9 @@ def run_analysis(cleaned_df):
     Clustering.save_clustering_results(zip_code_clusters)
     #
     # # Supervised Learning
+    # final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.directly_read_prepared_data(
+    #    './311dataset/final_nyc_311_df_supervised.csv')
     final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.prepare_data_for_supervised_learning(cleaned_df)
-    # # final_nyc_311_df_supervised = TrainEvaluateAndSaveModelToDisk.directly_read_prepared_data(
-    # #    './311dataset/final_nyc_311_df_supervised.csv')
     feature_vector_with_labels = TrainEvaluateAndSaveModelToDisk.prepare_feature_vector(final_nyc_311_df_supervised)
     TrainEvaluateAndSaveModelToDisk.train_linear_regressor(feature_vector_with_labels)
     TrainEvaluateAndSaveModelToDisk.train_gradient_boost_regressor(feature_vector_with_labels)

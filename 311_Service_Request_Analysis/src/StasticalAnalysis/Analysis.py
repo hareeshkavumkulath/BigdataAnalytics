@@ -22,7 +22,7 @@ def plot_top_boroughs_complaint_wise(complaint_type_df, year):
         nyc_311_df_borough = complaint_type_df.filter(complaint_type_df['Borough'] == top_boroughs[i])
         utilFor311.prepare_plot(nyc_311_df_borough, 'Complaint_Type', 'count',
                                 "Complaint Wise Distribution - " + top_boroughs[i] + " - " + str(year),
-                                "Complaint Types", "Count", fig_num, results_folder, x_tick_rotation='vertical')
+                                "Complaint Types", "Count", fig_num, results_folder, 'Q1', x_tick_rotation='vertical')
         fig_num += 1
 
 
@@ -30,7 +30,7 @@ def plot_complaint_wise_distribution(complaint_type_df, creation_year):
     results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q1
     utilFor311.prepare_plot(complaint_type_df, 'Complaint_Type', 'count',
                             "Complaint Wise Distribution - " + str(creation_year), "Complaint Types", "Count", 1,
-                            results_folder, x_tick_rotation='vertical')
+                            results_folder, 'Q1', x_tick_rotation='vertical')
 
 
 def get_creation_year(df):
@@ -45,7 +45,6 @@ def complaint_type_analysis(complaint_type_df):
 
 def monthly_hourly_analysis(df_with_month_hour):
     # Insight 2 : Daily, Hourly, Monthly Analysis
-    df_with_month_hour.cache()
     results_folder = Constants.RESULTS_FOLDER_ANALYSIS_Q2
     creation_year = get_creation_year(df_with_month_hour)
     df_with_month_hour = df_with_month_hour.withColumn("Creation_Hour",
@@ -64,38 +63,38 @@ def monthly_hourly_analysis(df_with_month_hour):
     # Hourly
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Hour', 'count',
                             "Cleaning & Household Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 1, results_folder, x_ticks=range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 1, results_folder, 'Q2', x_ticks=range(0, 24, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Hour', 'count',
                             "Noise Complaints count hourly basis. Year-" + str(creation_year), "Hour",
-                            'Total Count (across the year)', 2, results_folder, x_ticks=range(0, 24, 1))
+                            'Total Count (across the year)', 2, results_folder, 'Q2', x_ticks=range(0, 24, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Hour', 'count',
                             "Vehicle and Parking Complaints count hourly basis. Year-" + str(creation_year),
-                            "Hour", 'Total Count (across the year)', 3, results_folder, x_ticks=range(0, 24, 1))
+                            "Hour", 'Total Count (across the year)', 3, results_folder, 'Q2', x_ticks=range(0, 24, 1))
     # Daily
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Day', 'count',
                             "Cleaning & Household Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 4, results_folder, x_ticks=range(1, 32, 1))
+                            'Total Count (across the year)', 4, results_folder, 'Q2', x_ticks=range(1, 32, 1))
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Day', 'count',
                             "Noise Complaints count daily basis", "Day",
-                            'Total Count (across the year)', 5, results_folder,
+                            'Total Count (across the year)', 5, results_folder, 'Q2',
                             x_ticks=range(1, 32, 1))
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Day', 'count',
                             "Vehicle and Parking Complaints count daily basis. Year-" + str(creation_year), "Day",
-                            'Total Count (across the year)', 6, results_folder, x_ticks=range(1, 32, 1))
+                            'Total Count (across the year)', 6, results_folder, 'Q2', x_ticks=range(1, 32, 1))
 
     # Monthly
     months = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
     utilFor311.prepare_plot(df_house_hold_cleaning_issues, 'Creation_Month', 'count',
                             "Cleaning & Household Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 7, results_folder, x_ticks=range(1, 13, 1),
+                            "Month", 'Total Count (across the year)', 7, results_folder, 'Q2', x_ticks=range(1, 13, 1),
                             x_ticks_labels=months)
     utilFor311.prepare_plot(df_noise_issues, 'Creation_Month', 'count',
                             "Noise Complaints count monthly basis. Year-" + str(creation_year), "Month",
-                            'Total Count (across the year)', 8, results_folder, x_ticks=range(1, 13, 1),
+                            'Total Count (across the year)', 8, results_folder, 'Q2', x_ticks=range(1, 13, 1),
                             x_ticks_labels=months)
     utilFor311.prepare_plot(df_vehicles_and_parking_issues, 'Creation_Month', 'count',
                             "Vehicle and Parking Complaints count monthly basis. Year-" + str(creation_year),
-                            "Month", 'Total Count (across the year)', 9, results_folder, x_ticks=range(1, 13, 1),
+                            "Month", 'Total Count (across the year)', 9, results_folder, 'Q2', x_ticks=range(1, 13, 1),
                             x_ticks_labels=months)
 
 
@@ -119,7 +118,8 @@ def complaint_type_to_time_resolve(df_with_time_to_resolve, creation_year):
             all_agency_time_to_resolve.filter(all_agency_time_to_resolve["Agency"] == top_agencies[i]),
             'Complaint_Type', 'time_to_resolve_in_hrs',
             "Agency: " + top_agencies[i] + " average completion time for year " + str(creation_year),
-            "Complaint_Type", "Average time_to_resolve_in_hrs", fig_num, results_folder, x_tick_rotation='vertical',
+            "Complaint_Type", "Average time_to_resolve_in_hrs", fig_num, results_folder, 'Q3',
+            x_tick_rotation='vertical',
             is_count=False)
         fig_num += 1
 
