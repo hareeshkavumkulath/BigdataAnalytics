@@ -107,50 +107,61 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 **(Type-C) NOISE_ISSUES** = *'Noise - Residential', 'Noise', 'Noise - Commercial', 'Noise - Street/Sidewalk'*
 
-1. Trend Analysis : To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
- 
-	* City wide and Boroughs wide distribution of complaints
-		* Complaint Type Distribution in the year 2018 and 2019.
+1. **Trend Analysis: Mostly used python package - pyspark.sql** 
 
+To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
+
+a. City wide and Boroughs wide distribution of complaints
+		Complaint Type Distribution
 		![Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Overall.png?token=AKL5YZ6CUVLB65ZTRM362IS6SOGK4)
 
-		From the graph it is evident that, in the year 2018 and in 2019 the most number of complaints received for Heat/Hot Water issues and Residential Noise. There were more than 200,000 complaints related to Heat/Hot water, while In 2019 the residential noise complaints were higher than 2018. In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019. Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
+		* Both 2018 and 2019 saw most number of complaints for Heat/Hot Water issues and Residential Noise.
+		* In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019, indicating an improvement in the services.
+		* Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
 
-		Following are the major boroughs which reported at least 5000 complaints.
+	Following are the major boroughs which reported at least 5000 complaints.
 
-		![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
+	![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
 
-		Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. While in Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
+		* Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. 
+		* In Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
 		
-	* Monthly, Daily and Hourly distribution of complaints
-		a. Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
+b. Monthly, Daily and Hourly distribution of complaints
+
+	* Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
 		
 		![NoiseHourly2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018_2019.png?token=AKL5YZ33CMWTFF275GKHTV26S2B5U) 
 				
-		b. Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
+	* Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
 		
 		![ParkingDaily2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018_2019.png?token=AKL5YZ52NN32MA474IQNMTS6S2B7G)
 	
-		c. Monthly Analysis: For Type-A complaints January as a month significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
+	* Monthly Analysis: For Type-A complaints, January as a month saw significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
 		
 		![NoiseMonthly2018](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018_2019.png?token=AKL5YZ3Q6SRI2BQOBLFD4TC6S2CAO)
 
 
-	* Average time to resolve the request (Department Wise)
-		
-		![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
+c. Average time to resolve the request (Department Wise)
 
-		In both years 2018 and 2019 it takes more than 400hrs to fix the Unsanitary Condition issues. Other issues like water leak, Plumbing, Paint/Plaster, Request Large Bulky Item Collection took same amount of time in both years. Where the time taken for fixing the Water System issues is considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs. For all other issues the time to resolve the issues is same in both years. Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
+	![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
+
+	* In both 2018 and 2019 it took on an average more than 400hrs to fix the Unsanitary Condition issues. So authrorities might need to investiagte the reasons for this delay.
+
+	* The time taken for fixing the Water System issues was considerably reduced in the year 2019 from almost 400hrs to slightly above 100hrs, indicating an improvement in the service. 
+
+	* Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
 
 		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
 
 		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Agency.png?token=AKL5YZ3ZWI6CZRS73EBXWVS6SU3QS)
-	
-**Note:** Considering space constraints not all plots have been shown here. Do consider visiting the results folder within our Project's root **"311_Service_Request_Analysis/results/Analysis"**, to have a view of all the generated plots.
-	
-2. Clustering - Results show for 2019 Data
-	* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
-	**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
+		
+		
+2. **Clustering: Mostly used python package - pyspark.ml** 
+
+Results shown for 2019 Data:
+
+* With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
+**2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
 	
 	![CostKMeans_Elbow](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringCostAndElbow.JPG?token=AKZR5NXUIG5HGSOJEDAGYR26SMPOO)
 		
@@ -169,7 +180,7 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
-3. Supervised Learning - 
+3. **Supervised Learning: Mostly used python package - pyspark.ml** 
 	The prepared data created above have categorical column whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
 	
 	**End features list:**
@@ -207,9 +218,10 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* e_CHANNEL_TYPE_ONLINE
 	
 	**Train Test Split Ratio**
-	Train-Test Split ratio is 0.8,0.2 where 0.8 is training sample and 0.2 is test sample.
+	Train-Test Split ratio is **0.8,0.2 where 0.8 is training sample and 0.2 is test sample**.
 	
-	Hyper parameters is tested to find the best hyperparameters based on 3 fold cross validation. 
+	3-fold cross validation with Grid search was used for Hyper parameters tuning.
+	
 	**Hyperparameters explored:**
 	* Linear Regression regParam= [0.1, 0.01], maxIter= [100, 200, 300]
 	where regParam is regularisation parameter with value greater than zero, maxIter correspond to epochs
@@ -218,10 +230,19 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* Gradient Boost maxIter= [10, 20]
 	where maxIter correspond to epochs
 	
-	**Best Hyperparameters after 3 fold cross validation.**
+	**Best Hyperparameters values**
 	* Linear Regression regParam= 0.1, maxIter, 100
 	* Random Forest numTrees= 120
 	* Gradient Boost maxIter= 20
+
+	**Evaluation Metrics used -**
+	
+	* RMSE(Root Mean Squared) - Lesser the RMSE of a model the better it is. It provides a quantifiable error figure of the same unit as that of the target variable.
+	However, RMSE alone cannot determine the goodness of a model. Say an RMSE value obtained is 192 but against what baseline. How good is this 192?
+	We therefore used another popular evaluation metric R-Square which basically compares how good our model is to naive model which predicts simply the mean value of the target variable.
+	* R-Squared - scale free(unit independent) unlike RMSE (Range -infinity to 1); R-squared value .5 means model captures 50% variance of the target variable however a negative value indicates a poorly fit model. 
+	* Formulae:	
+	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
 	
 	**RMSE AND R2 value for Linear Regressor on train data:**
 	* Linear Regression RMSE=197.13 , R2=0.305 	
@@ -231,27 +252,32 @@ For a more meaningful analysis out of the **367** different complaint types we s
 	* Random Forest RMSE=199.18 , R2=0.3136 
 	* Gradient Boost RMSE=194.61 , R2=0.345 
 	
-	**For detail results refer 311_Service_Request_Analysis/results/Analysis/Supervised Learning/2019_Reference**
+	**For detailed results refer 311_Service_Request_Analysis/results/Analysis/Supervised Learning/2019_Reference**
 	
 	Best Regressior model based on RMSE and R2 will be **Gradient Boost**
-	**Feature Importance -**
+	
+	**Gradient Boost Top 5 Feature Importance Scores:**
 	* Creation_Day - 0.098
 	* Creation_Month - 0.188
 	* Creation_Hour - 0.152
 	* e_AGENCY_DOITT - 0.076
 	* e_COMPLAIN_TYPE_Noise - Commercial - 0.085
-	
-	**Evaluation Metric -**
-	* RMSE(Root Mean Squared) - The model with less RMSE will be better
-	* R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
-	* Formulae:	
-	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
-	
+		
 	
 #### Limitations and Future Work
 	
-	**To be done**
+	The analysis done as part of this project was limited in some aspects like:
+	
+	a. Analysis was only carried out only over the dataset from the year 2019 and 2018.  
+	b. Supervised Learning involved trying hyper-parameter tuning for very few hyper-parameters values.
 
+	Both the above mentioned points were largely attributed to the fact that the computational resources used for this project were regular personal laptop machines. 
+	In order to overcome such limitations a future extension to this project could involve running this same working pipeline over a compute cluster which would allow us to cover more data and may be arrive at better results within our analysis.  
+
+#### Configuration Used
+	
+	It took us approximately **78 mins** to generate all the results on a single machine with **i5 5th Gen** and **8GB RAM**.
+	
 #### Instructions to run the project
 	* Download the Project Directory to your loacl machine - "311_Service_Request_Analysis"
 	
