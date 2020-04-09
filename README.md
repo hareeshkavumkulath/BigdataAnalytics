@@ -46,9 +46,9 @@ Original dataset has 41 fields in total. Cleaning activities involved are as fol
 	* Calculating the "time taken to resolve the issue in hours" after standardizing creation and closing date.
 	* Extracting separate columns for Day, Month, Hour of request creation and closing.
 
-Original ***2019*** Dataset has - ***2456832*** rows -> After Cleaning it had ***1128786*** rows
+Original ***2019*** Dataset has - ***2456832*** rows **(1.27 GB)** -> After Cleaning it had ***1128786*** rows **(315 MB)**
 
-Original ***2018*** Dataset has - ***2741682*** rows -> After Cleaning it had ***1255981*** rows
+Original ***2018*** Dataset has - ***2741682*** rows **(1.43 GB)** -> After Cleaning it had ***1255981*** rows **(352 MB)**
 
 List of ***25 columns*** after cleaning:
 
@@ -310,7 +310,7 @@ It took us approximately **78 mins** to generate all the results on a single mac
 		
 		Actual dataset can be downloaded from:
 		[Actual 2018 and 2019 Cleaned Dataset](https://drive.google.com/drive/folders/1MJLL9A0rSUKeLnUFSA5x0XfQuCwTV-yG?usp=sharing)
-		
+
 		b) True/False -> True - Given Input CSV is cleaned data and no need to pre-process it again. False - Given Input CSV is un-cleaned data so we need to run it through the pre-processing pipeline.
 
 #### References
