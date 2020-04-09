@@ -169,42 +169,83 @@ For a more meaningful analysis out of the **367** different complaint types we s
 
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
-3. Supervised Learning
-	The prepared data created above have categorical columsn whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
+3. Supervised Learning - 
+	The prepared data created above have categorical column whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
 	
-	End features list:
+	**End features list:**
 	* Creation_Month
 	* Creation_Day
 	* Creation_Hour
-	* e_AGENCY_{AgencyType} where AgencyType are different Agency Type
-	* e_BOROUGH_{BoroughType} where BoroughType are different Borough Type
-	* e_COMPLAIN_TYPE_{ComplainType} where ComplainType are different Complain Type
-	* e_CHANNEL_TYPE_{ChannelType} where ChannelType are different Channel Type
+	* e_AGENCY_HPD
+	* e_AGENCY_NYPD
+	* e_AGENCY_DEP
+	* e_AGENCY_DSNY
+	* e_AGENCY_DOITT
+	* e_BOROUGH_UNSPECIFIED
+	* e_BOROUGH_QUEENS
+	* e_BOROUGH_BROOKLYN
+	* e_BOROUGH_BRONX
+	* e_BOROUGH_MANHATTAN
+	* e_BOROUGH_STATEN ISLAND
+	* e_COMPLAIN_TYPE_UNSANITARY CONDITION
+	* e_COMPLAIN_TYPE_Illegal Parking
+	* e_COMPLAIN_TYPE_Noise - Residential
+	* e_COMPLAIN_TYPE_Noise - Commercial 
+	* e_COMPLAIN_TYPE_Water System 
+	* e_COMPLAIN_TYPE_Blocked Driveway
+	* e_COMPLAIN_TYPE_HEAT/HOT WATER
+	* e_COMPLAIN_TYPE_PAINT/PLASTER
+	* e_COMPLAIN_TYPE_Noise
+	* e_COMPLAIN_TYPE_Request Large Bulky Item Collection
+	* e_COMPLAIN_TYPE_PLUMBING
+	* e_COMPLAIN_TYPE_WATER LEAK
+	* e_COMPLAIN_TYPE_Noise
+	* e_CHANNEL_TYPE_MOBILE
+	* e_CHANNEL_TYPE_UNKNOWN
+	* e_CHANNEL_TYPE_OTHER
+	* e_CHANNEL_TYPE_PHONE
+	* e_CHANNEL_TYPE_ONLINE
 	
+	**Train Test Split Ratio**
 	Train-Test Split ratio is 0.8,0.2 where 0.8 is training sample and 0.2 is test sample.
 	
 	Hyper parameters is tested to find the best hyperparameters based on 3 fold cross validation. 
-	Hyperparameters explored:
-	* Linear Regression regParam= [0.1, 0.01], fitIntercept= [False, True], maxIter= [100, 150, 200]
-	where regParam is regularisation parameter with value greater than zero, fitIntercept is the intercept of line, maxIter correspond to epochs
-	* Random Forest numTrees= [35, 50], maxDepth= [7, 10]
-	where numTrees are number of trees to be formed in Random Forest, maxDepth is the maximum depth of one tree
-	* Gradient Boost maxIter= [20, 50, 100], maxDepth= [5, 10, 20]
-	where maxIter correspond to epochs, maxDepth is the maximum depth of one tree
+	**Hyperparameters explored:**
+	* Linear Regression regParam= [0.1, 0.01], maxIter= [100, 200, 300]
+	where regParam is regularisation parameter with value greater than zero, maxIter correspond to epochs
+	* Random Forest numTrees= [70, 120]
+	where numTrees are number of trees to be formed in Random Forest
+	* Gradient Boost maxIter= [10, 20]
+	where maxIter correspond to epochs
 	
-	Best Hyperparameters after 3 fold cross validation.
+	**Best Hyperparameters after 3 fold cross validation.**
 	* Linear Regression regParam= 0.1, maxIter, 100
-	* Random Forest numTrees= 120, maxDepth= 7
-	* Gradient Boost maxIter= 20, maxDepth= 20
+	* Random Forest numTrees= 120
+	* Gradient Boost maxIter= 20
 	
-	RMSE AND R2 value for each model:
-	* Linear Regression RMSE=195.99 , R2=0.3091 	
-	* Random Forest RMSE=193.34 , R2=0.3276 
-	* Gradient Boost RMSE=188.60 , R2=0.3602 
+	**RMSE AND R2 value for Linear Regressor on train data:**
+	* Linear Regression RMSE=197.13 , R2=0.305 	
+	
+	**RMSE AND R2 value for each model on test data:**
+	* Linear Regression RMSE=201.97 , R2=0.294 	
+	* Random Forest RMSE=199.18 , R2=0.3136 
+	* Gradient Boost RMSE=194.61 , R2=0.345 
 	
 	**For detail results refer 311_Service_Request_Analysis/results/Analysis/Supervised Learning/2019_Reference**
 	
 	Best Regressior model based on RMSE and R2 will be **Gradient Boost**
+	**Feature Importance -**
+	* Creation_Day - 0.098
+	* Creation_Month - 0.188
+	* Creation_Hour - 0.152
+	* e_AGENCY_DOITT - 0.076
+	* e_COMPLAIN_TYPE_Noise - Commercial - 0.085
+	
+	**Evaluation Metric -**
+	* RMSE(Root Mean Squared) - The model with less RMSE will be better
+	* R-Squared - scale free as compared to RMSE (Range -infinity to 1); positive R-squared means model is better than naive approach of predicting mean
+	* Formulae:	
+	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
 	
 	
 #### Limitations and Future Work
