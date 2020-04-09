@@ -25,7 +25,7 @@ With an overall motivation to offer a small subset of functionalities, a typical
 2. Further we try building a predictive model with an ability to predict the closure time for a particular request. This provides a way for the policy makers to closely scrutinize the operations of the concerned department, thereby allowing easy identification of any ineffective practices.
 
 #### Related Work
-Taking reference of 311-data alone, there exists Open311 [1], a standard protocol developed for civic issue tracking. Developers of the Open311 community even offer a rich set of APIs which are being used to create their independent applications, enabling citizens to conveniently raise and track their 311 requests. In terms of analysis Sam Goodgame and Romulo Manzano from UC Berkeley present a similar analysis of NYC 311 data [2] on an AWS EC2 instance with Hadoop. In [3] authors have gone a step further by combining 311 data for the city of Miami with Census Tracts data and analysing how 311 service request patterns are associated with personal attributes and living conditions. With most of the existing studies primarily relying on Python libraries like Numpy, Pandas and Scikit Learn, throughout this paper we would be trying to baseline our results against these existing works, while relying on an Apache Spark based implementation.
+Taking reference of 311-data alone, there exists Open311 [1], a standard protocol developed for civic issue tracking. Developers of the Open311 community even offer a rich set of APIs which are being used to create their independent applications, enabling citizens to conveniently raise and track their 311 requests. In terms of analysis Sam Goodgame and Romulo Manzano from UC Berkeley present a similar analysis of NYC 311 data [2] on an AWS EC2 instance with Hadoop. In [3] authors have gone a step further by combining 311 data for the city of Miami with Census Tracts data and analysing how 311 service request patterns are associated with personal attributes and living conditions. With most of the existing studies primarily relying on Python libraries like Numpy, Pandas and Scikit Learn, throughout this paper we would be trying to baseline our results against these existing works, while relying on an Apache Spark based implementation. [6] Has been used as a baseline work for the supervised learning phase of our study.
 
 ## Materials and Methods
 
@@ -96,7 +96,7 @@ List of ***25 columns*** after cleaning:
 2. Supervised learning will be used to fulfil our second objective to predict the closure time for a request.
 	* SPARK-ML offering Regression Algorithms like (Linear Regression, Random Forest, Gradient boosted tree Regression) will be evaluated and the best performing model would be selected.
 	* To start with, a 3-Fold Cross-Validation strategy would be used for hyperparameter tuning (for a few selected hyperparameters.)
-	* RMSE (Root Mean Squared Error) would initially be used as our evaluation metric.
+	* RMSE (Root Mean Squared Error) and R-Squared(Co-efficient of Determination) would be used as our evaluation metric.
 
 #### Results and Discussion
 For a more meaningful analysis out of the **367** different complaint types we shortlisted **13** popular complaint types under 3 categories:
@@ -112,38 +112,41 @@ For a more meaningful analysis out of the **367** different complaint types we s
 To identify any recurring trends we compared results obtained over the dataset from the years 2018 and 2019.
 
 a. City wide and Boroughs wide distribution of complaints
-		Complaint Type Distribution
-		![Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/Overall.png?token=AKL5YZ6CUVLB65ZTRM362IS6SOGK4)
+Complaint Type Distribution
 
-		* Both 2018 and 2019 saw most number of complaints for Heat/Hot Water issues and Residential Noise.
-		* In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019, indicating an improvement in the services.
-		* Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
+![Complaint_type_2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/ReportImages/Overall.png?token=AKZR5NQD6LMAATB3NQBTA2C6TCGJU)
 
-	Following are the major boroughs which reported at least 5000 complaints.
+* Both 2018 and 2019 saw most number of complaints for Heat/Hot Water issues and Residential Noise.
+* In 2018 Requests to collect large bulky items were almost 175,000 which reduced to 100,000 in 2019, indicating an improvement in the services.
+* Complaints about illegal parking is similar(Above 100,000) in both years. There were between 50,000 and 75,000 number of complaints related to Noise, Street/Sidewalk noise, Paint/Plaster, Plumbing, Unsanitary Condition and Water System were reported in both years. The least number of complaints obtained in both years are for Water Leak issues and Commercial noise which were less than 50,000.
 
-	![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/borough.png?token=AKL5YZ7WCVT5KABQAIJ2VV26SPPN2)
+Following are the major boroughs which reported at least 5000 complaints.
 
-		* Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. 
-		* In Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
+![Borough_Wise_Complaint_type_2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q1/ReportImages/Borough_Grouped.png?token=AKZR5NWQFJ6W7AEVH2MUBJK6TCGL4)
+
+* Except in Queens, in all boroughs there were almost 60,000-70,000 issues related to Heat/Hot water were reported. 
+* In Queens the most common complaints were on illegal parking and collection of Large and Bulky items.
 		
 b. Monthly, Daily and Hourly distribution of complaints
 
-	* Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
+* Hourly Analysis:  Similar hourly trend in call volumes for Type-A, Type-B, Type-C complaints from 2018 to 2019. Maximum volume of Type-A complaints recorded from 9:00 am to 5:00 pm. For Type-C(Noise) an expected U-Shaped plot can be observed where we see an increases after midnight between 1:00 am to 2:00 am and then again starts increasing again after 8:00 pm in the night.
 		
-		![NoiseHourly2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018_2019.png?token=AKL5YZ33CMWTFF275GKHTV26S2B5U) 
+![NoiseHourly2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseHourly2018_2019.png?token=AKZR5NQN6TKVQHDKUGWBWCK6TCGPI) 
 				
-	* Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
+* Daily Analysis: Call volumes have pretty much been consistent on a daily basis. We could not identify any such specific days in a month where the call volume were observed to have a sharp increase or decrease. However (Type-B) Parking in New York City which is often seen as a coveted luxury, had a consistent higher number of complaints on a daily basis along with a rise in complaints from 2018 to 2019.
 		
-		![ParkingDaily2018_2019](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018_2019.png?token=AKL5YZ52NN32MA474IQNMTS6S2B7G)
+![ParkingDaily2018_2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/VehicleDaily2018_2019.png?token=AKZR5NUFX2TGCIGNQJ4MRI26TCGRM)
 	
-	* Monthly Analysis: For Type-A complaints, January as a month saw significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
+* Monthly Analysis: For Type-A complaints, January as a month saw significantly higher complaints both in 2018 and 2019. However trend obtained shows a reduction during July-December period from 2018 to 2019. For Type-C(Noise) both 2018 and 2019 saw peak during Summers i.e. May-August.
 		
-		![NoiseMonthly2018](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018_2019.png?token=AKL5YZ3Q6SRI2BQOBLFD4TC6S2CAO)
+![NoiseMonthly2018](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q2/ReportImages/NoiseMonthly2018_2019.png?token=AKZR5NU32ZMQ6ZKYUOYGGTK6TCGTU)
 
 
-c. Average time to resolve the request (Department Wise)
+c. Average time to resolve the request
 
-	![AverageTimeToResolveIssue](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Overall.png?token=AKL5YZ3CUPZNQXXHEZ5TQ3S6SU3NU)
+* On the basis of Complaint Type
+
+	![AverageTimeToResolveIssue](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/ReportImages/Overall.png?token=AKZR5NVMWUYMMQHFTHN4PMK6TCGV4)
 
 	* In both 2018 and 2019 it took on an average more than 400hrs to fix the Unsanitary Condition issues. So authrorities might need to investiagte the reasons for this delay.
 
@@ -151,9 +154,19 @@ c. Average time to resolve the request (Department Wise)
 
 	* Least time taken for issues like, Commercial, Residential Noise, Street Noise, Heat/Hot water issue, Blocked Driweway, which is less than 100hrs.
 
-		There were 4 Agencies(Department of Housing Preservation and Development, New York City Police Department, Department of Environmental Protection, Department of Sanitation) handling specific complaints in 2018 which got increased to 5 by adding DOITT(Department of Information Technology and Telecommunications). Here is the breakdown graphes department wise.
+* On the basis of 5 major Agencies:
 
-		![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/hareeshkavumkulath/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/Agency.png?token=AKL5YZ3ZWI6CZRS73EBXWVS6SU3QS)
+	* Department of Housing Preservation and Development (HPD)
+
+	* New York City Police Department (NYPD)
+
+	* Department of Environmental Protection (DEP)
+
+	* Department of Sanitation (DSNY) 
+
+	* Department of Information Technology and Telecommunications (DOITT)
+
+![AgencyWiseComplaintTypeResolutionTime](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Q3/ReportImages/Agency.png?token=AKZR5NVZOZ6XG5UPKNPWTDC6TCGXO)
 		
 		
 2. **Clustering: Mostly used python package - pyspark.ml** 
@@ -163,16 +176,16 @@ Results shown for 2019 Data:
 * With each Zipcode represented by a 13-D standardized vector of Complaint_Type count we ran K-Means simulation runs starting from 
 **2 Clusters upto 20 Clusters** and tried plotting an Elbow curve shown in the figure below. The **cost(J)** in the plot represents - **Inertia** which is the sum of squared distances of samples to their closest cluster center.
 	
-	![CostKMeans_Elbow](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringCostAndElbow.JPG?token=AKZR5NXUIG5HGSOJEDAGYR26SMPOO)
+	![CostKMeans_Elbow](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ReportImages/ClusteringCostAndElbow.JPG?token=AKZR5NRMMAMCASDPMLEBEAS6TCG2Y)
 		
 	Based on the elbow curve shown above we arrived at **8** being the optimal number of clusters for the given dataset and Re-Ran our clustering with a predefined value of **K set to 8**.
 	
 	Resulting zipcode clusters obtained are shown in the file:
-	[CluteringResults2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/ClusteringResults.txt?token=AKZR5NWTSL4VDYTSI6LGY7S6RVJXC)
+	[CluteringResults2019](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Reference_2019/ClusteringResults.txt?token=AKZR5NWCBW2OLEPGKUKR4S26TCG5E)
 	
 	As a sanity check for our results we tried analysing one of the clusters (Cluster 2 in results file) to see if there is any recognizable complaint trend among the zipcodes in that cluster.
 	
-	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Analysis_Cluster_2.png?token=AKZR5NXVWL3JTTPE4MZGXV26SZ256)
+	![ClusterAnalysis](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Clustering/Reference_2019/Analysis_Cluster_2.png?token=AKZR5NRZT56YAJDULNZ774C6TCHBM)
 	
 	As per our expectations every zipcode within this cluster had the **same top 5 complaints(namely Heat/Hot Water, Illegal Parking, Blocked Driveway, Noise - Residential and Request Large Bulky Item Collection)**.
 	
@@ -238,11 +251,13 @@ Results shown for 2019 Data:
 	**Evaluation Metrics used -**
 	
 	* RMSE(Root Mean Squared) - Lesser the RMSE of a model the better it is. It provides a quantifiable error figure of the same unit as that of the target variable.
+	![EvaluationMetricRMESE](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/ReportImages/RMSE.JPG?token=AKZR5NSPV5NME6OHBVSLZVC6TCHGY)
+	
 	However, RMSE alone cannot determine the goodness of a model. Say an RMSE value obtained is 192 but against what baseline. How good is this 192?
 	We therefore used another popular evaluation metric R-Square which basically compares how good our model is to naive model which predicts simply the mean value of the target variable.
+	
 	* R-Squared - scale free(unit independent) unlike RMSE (Range -infinity to 1); R-squared value .5 means model captures 50% variance of the target variable however a negative value indicates a poorly fit model. 
-	* Formulae:	
-	![EvaluationMetrics](https://raw.githubusercontent.com/LoveGrewal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/EvaluationFormulae.png?token=AD37NDBQYGKV7VCFJXUZJCC6S5MTU)
+	![EvaluationMetricR-Square](https://raw.githubusercontent.com/apoorvsemwal/BigdataAnalytics/master/311_Service_Request_Analysis/results/Analysis/Supervised%20Learning/ReportImages/R2.JPG?token=AKZR5NQMN7SXY2DHUU2QXK26TCHEG)
 	
 	**RMSE AND R2 value for Linear Regressor on train data:**
 	* Linear Regression RMSE=197.13 , R2=0.305 	
