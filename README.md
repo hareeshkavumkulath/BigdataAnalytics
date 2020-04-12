@@ -194,9 +194,12 @@ Results shown for 2019 Data:
 	Clustering results based on 2019 data suggest that Muncipal authorities can divide the entire NewYork city zip-codes into 8 Non-Emergency-Service-Groups(based on 8 clusters) and further allocate resources to these groups based on the more frequent and common complaint types within that group of zipcodes.
 	
 3. **Supervised Learning: Mostly used python package - pyspark.ml** 
-	The prepared data created above have categorical column whose magnitude does not correspond to regressor predictions. To use this categorical value in a training data, a new column is created for each categorical type. **Categorical columns use for this purpose - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
+
+	The cleaned data had quite a few categorical columns. Instead of directly using label encoding (as it would simply assign numeric labels to categories and we never wanted the magnitude of that assigned numeric value should influence our model in any way ), we preffered using One-Hot encoding and created new fetaures for each category. 
 	
-	**End features list:**
+	**Categorical columns use for One-Hot Encoding - "Agency", "Borough", "complaint_type", "open_data_channel_type".**
+	
+	**Resulting features list after encoding:**
 	* Creation_Month
 	* Creation_Day
 	* Creation_Hour
